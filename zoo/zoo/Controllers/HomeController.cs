@@ -13,6 +13,11 @@ namespace zoo.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+            return RedirectToAction("Index", "Login");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
