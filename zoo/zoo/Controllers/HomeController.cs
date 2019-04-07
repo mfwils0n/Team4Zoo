@@ -18,7 +18,7 @@ namespace zoo.Controllers
             return RedirectToAction("Index", "Login");
         }
 
-        public ActionResult About()
+        public ActionResult caregiverHome()
         {
             ViewBag.Message = "Your application description page.";
 
