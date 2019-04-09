@@ -40,7 +40,7 @@
                     }
                     @if (Session["Employee_ID"] != null)
                     {
-                        <li>@Html.ActionLink("Hi " + Session["Name"].ToString().ToUpper() + "!", "My Profile", "Home")</li>
+                        <li>@Html.ActionLink("Hi " + Session["Name"].ToString().ToUpper() + "!", "Index", "Profile")</li>
                         <li><a href="@Url.Action("LogOut","Login")">Log Out</a></li>
                     }
                 </ul>

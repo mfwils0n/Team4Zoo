@@ -32,4 +32,18 @@ namespace zoo.Models
         public string RegistrationSuccessMessage { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
     }
+
+    public class UserProfile
+    {
+        public string newUsername { get; set; }
+        [DataType(DataType.Password)]
+        public string oldPassword { get; set; }
+        [DataType(DataType.Password ,ErrorMessage ="Do not exceed 8 Characters")]
+        public string newPassword { get; set; }
+        [DataType(DataType.EmailAddress, ErrorMessage ="Please enter a vaild Email Address.")]
+        public string newEmail { get; set; }
+        [Required(ErrorMessage = "Phone Number Required!")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+        public string newPhone { get; set; }
+    }
 }
