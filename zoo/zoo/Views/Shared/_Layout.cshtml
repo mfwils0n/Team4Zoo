@@ -30,7 +30,7 @@
                             <li>@Html.ActionLink("My Schedule", "Index", "Home")</li>
 
                         }
-                        if (Session["RoleName"].ToString().Equals("SalesAssociate"))
+                         if (Session["RoleName"].ToString().Equals("SalesAssociate"))
                         {
                             <li>@Html.ActionLink("Sales", "Sales", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Inventory", "Inventory", "SalesAssociate")</li>
