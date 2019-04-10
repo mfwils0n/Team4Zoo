@@ -30,6 +30,13 @@
                             <li>@Html.ActionLink("My Schedule", "Index", "Home")</li>
 
                         }
+                        if (Session["RoleName"].ToString().Equals("SalesAssociate"))
+                        {
+                            <li>@Html.ActionLink("Sales", "Sales", "SalesAssociate")</li>
+                            <li>@Html.ActionLink("Inventory", "Inventory", "SalesAssociate")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "SalesAssociate")</li>
+                            <li>@Html.ActionLink("My Schedule", "Index", "SalesAssociate")</li>
+                        }
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
