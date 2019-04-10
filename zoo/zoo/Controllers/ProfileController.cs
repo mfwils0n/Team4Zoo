@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using zoo.Models;
+using System.Text.RegularExpressions;
 
 namespace zoo.Controllers
 {
@@ -47,6 +48,12 @@ namespace zoo.Controllers
                 {
                     return RedirectToAction("Index", "Profile");
                 }
+                else if (newUsername.Length < 2 || newUsername.Length > 15) {
+                    
+                    userModel.UserNameErrorMessage = "User Name must be between 2-15 characters";
+                    return View("Index", userModel);
+
+                }
 
                 else
                 {
@@ -75,6 +82,12 @@ namespace zoo.Controllers
                     return RedirectToAction("Index", "Profile");
                 }
 
+                else if(newPassword.Length < 8 || newPassword.Length > 10)
+                {
+                    userModel.PwdErrorMessage = "Password must be between 8-10 characters";
+                    return View("Index", userModel);
+                }
+
                 else
                 {
                     db.Database.ExecuteSqlCommand("update zoo.Credentials set password = '" + newPassword + "' where username = '" + oldUsername + "'");
@@ -91,28 +104,47 @@ namespace zoo.Controllers
         public ActionResult EditEmail(UserProfile userModel)
         {
             using (team4zooEntities db = new team4zooEntities())
-            {                
+            {
+                Regex reg = new Regex(@"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$");
                 System.Guid Employee_ID = (System.Guid)Session["Employee_ID"];
                 string newEmail = userModel.newEmail;
-                db.Database.ExecuteSqlCommand("update zoo.Employee set email = '" + newEmail + "' where Employee_ID = '" + Employee_ID + "'");             
-                Session.Abandon();
-                return RedirectToAction("Index", "Home");
-               
+                if (!reg.IsMatch(newEmail))
+                {
+                    userModel.EmailErrorMessage = "Invalid Input";
+                    return View("Index", userModel);
+                }
+                else
+                {
+                    db.Database.ExecuteSqlCommand("update zoo.Employee set email = '" + newEmail + "' where Employee_ID = '" + Employee_ID + "'");
+                    Session.Abandon();
+                    return RedirectToAction("Index", "Home");
+                }
             }
         }
 
         [HttpPost]
         public ActionResult EditPhone(UserProfile userModel)
         {
-            using (team4zooEntities db = new team4zooEntities())
-            {
-                System.Guid Employee_ID = (System.Guid)Session["Employee_ID"];
-                string newPhone = userModel.newPhone;
-                db.Database.ExecuteSqlCommand("update zoo.Employee set phone_num = '" + newPhone + "' where Employee_ID = '" + Employee_ID + "'");
-                Session.Abandon();
-                return RedirectToAction("Index", "Home");
+           using (team4zooEntities db = new team4zooEntities())
+           {
+                Regex reg = new Regex(@"^[2-9]\d{2}-\d{3}-\d{4}$");
+                    System.Guid Employee_ID = (System.Guid)Session["Employee_ID"];
+                    string newPhone = userModel.newPhone;
+                if (!reg.IsMatch(newPhone))
+                {
+                    userModel.PhoneErrorMessage = "Invalid Input";
+                    return View("Index", userModel);
+                }
+                else
+                {
+                    db.Database.ExecuteSqlCommand("update zoo.Employee set phone_num = '" + newPhone + "' where Employee_ID = '" + Employee_ID + "'");
+                    Session.Abandon();
+                    return RedirectToAction("Index", "Home");
 
-            }
+                }
+           }
+            
         }
     }
 }

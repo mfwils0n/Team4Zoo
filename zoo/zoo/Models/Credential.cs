@@ -38,12 +38,16 @@ namespace zoo.Models
         public string newUsername { get; set; }
         [DataType(DataType.Password)]
         public string oldPassword { get; set; }
-        [DataType(DataType.Password ,ErrorMessage ="Do not exceed 8 Characters")]
+        [DataType(DataType.Password)]
+        [MaxLength(8)]
+        [Required]
         public string newPassword { get; set; }
-        [DataType(DataType.EmailAddress, ErrorMessage ="Please enter a vaild Email Address.")]
+        public string PwdErrorMessage { get; set; }
+        public string UserNameErrorMessage { get; set; }
+        public string PhoneErrorMessage { get; set; }
+        public string EmailErrorMessage { get; set; }
         public string newEmail { get; set; }
-        [Required(ErrorMessage = "Phone Number Required!")]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+        [Required(ErrorMessage = "Mobile Number is required.")]
         public string newPhone { get; set; }
     }
 }
