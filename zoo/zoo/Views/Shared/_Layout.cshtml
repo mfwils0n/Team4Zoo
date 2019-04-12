@@ -3,11 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -19,24 +21,34 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    
+
                     @if (Session["Employee_ID"] != null)
                     {
                         if (Session["RoleName"].ToString().Equals("Caregiver"))
                         {
-                            <li>@Html.ActionLink("Home", "caregiverHome", "Home")</li>
+                            <li>@Html.ActionLink("Home", "Index", "CareGiverHome")</li>
                             <li>@Html.ActionLink("My Animals", "Index", "Home")</li>
                             <li>@Html.ActionLink("Exhibits and Attractions", "Index", "Home")</li>
                             <li>@Html.ActionLink("My Schedule", "Index", "Home")</li>
 
                         }
-                         if (Session["RoleName"].ToString().Equals("SalesAssociate"))
+                        if (Session["RoleName"].ToString().Equals("SalesAssociate"))
                         {
                             <li>@Html.ActionLink("Sales", "Sales", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Inventory", "Inventory", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "SalesAssociate")</li>
                             <li>@Html.ActionLink("My Schedule", "Index", "SalesAssociate")</li>
                         }
+                        if (Session["RoleName"].ToString().Equals("Admin"))
+                        {
+                            <li>@Html.ActionLink("Home", "Home", "Admin")</li>
+                            <li>@Html.ActionLink("Departments", "Dept", "Admin")</li>
+                            <li>@Html.ActionLink("Staff Management", "Index", "Admin")</li>
+                            <li>@Html.ActionLink("Maintenance", "Index", "Admin")</li>
+                            <li>@Html.ActionLink("Finance", "Index", "Admin")</li>
+                            <li>@Html.ActionLink("Reports", "Index", "Admin")</li>
+                        }
+
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -53,10 +65,9 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
-        
     </div>
 
     @Scripts.Render("~/bundles/jquery")

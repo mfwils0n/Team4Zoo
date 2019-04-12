@@ -33,11 +33,11 @@ namespace zoo.Controllers
                 {
                     var account_status = db.Employees.Where(x => x.Employee_ID == userCredentials.Employee_ID).Select(y => y.isActive).FirstOrDefault();
                     if (userCredentials.Employee_ID == null || Convert.ToInt32(account_status) == 0 )
-                   {
+                    {
                         userModel.LoginErrorMessage = "The Account is deactivated";
                         return View("Index", userModel);
-                   }
-                  else 
+                    }
+                    else 
                     {
                         Session["Name"] = db.Employees.Where(x => x.Employee_ID == userCredentials.Employee_ID).Select(y => y.display_name).FirstOrDefault();
                         Session["username"] = userCredentials.username;

@@ -10,6 +10,7 @@
 namespace zoo.Models
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     
     public partial class Animal
@@ -39,5 +40,6 @@ namespace zoo.Models
         public virtual ICollection<Animal_Medication_Care> Animal_Medication_Care { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<Food_Supply> Food_Supply { get; set; }
+        public IList EmployeesAnimals { get; set; }
     }
 }
