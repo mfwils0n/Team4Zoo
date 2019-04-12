@@ -48,6 +48,12 @@
                             <li>@Html.ActionLink("Finance", "Index", "Admin")</li>
                             <li>@Html.ActionLink("Reports", "Index", "Admin")</li>
                         }
+                        if (Session["RoleName"].ToString().Equals("CaregiverSuper"))
+                        {
+                            <li>@Html.ActionLink("My Animals", "MyAnimals", "CaregiverSuper")</li>
+                            <li>@Html.ActionLink("My Employees", "MyEmployees", "CaregiverSuper")</li>
+                            <li>@Html.ActionLink("My Attractions", "MyAttractions", "CaregiverSuper")</li>
+                        }
 
                     }
                 </ul>
