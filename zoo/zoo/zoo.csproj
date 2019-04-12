@@ -171,6 +171,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\SalesAssociateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -287,6 +288,9 @@
     <Content Include="Models\DatabaseModel.edmx.diagram">
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Content>
+    <Content Include="obj\Debug\zoo.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\zoo.dll" />
+    <Content Include="obj\Debug\zoo.pdb" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -309,6 +313,14 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DatabaseModel.csdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DatabaseModel.msl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DatabaseModel.ssdl" />
+    <Content Include="obj\Debug\Tsc.out" />
+    <Content Include="obj\Debug\zoo.csproj.CopyComplete" />
+    <Content Include="obj\Debug\zoo.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\zoo.csprojAssemblyReference.cache" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -355,9 +367,14 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\SalesAssociate\Contact.cshtml" />
+    <Content Include="Views\SalesAssociate\Inventory.cshtml" />
+    <Content Include="Views\SalesAssociate\Sales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\CaregiverSuper\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
