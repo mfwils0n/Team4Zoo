@@ -169,6 +169,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CareGiverHomeController.cs" />
+    <Compile Include="Controllers\CaregiverSuperController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -257,9 +258,6 @@
     <Compile Include="Models\Zoo.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -374,24 +372,10 @@
     <Content Include="Models\DatabaseModel.edmx.diagram">
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Content>
-    <Content Include="obj\Debug\TempPE\Models.DatabaseModel.Context.cs.dll" />
-    <Content Include="obj\Debug\TempPE\Models.DatabaseModel.cs.dll" />
-    <Content Include="obj\Debug\TempPE\Models.DatabaseModel.Designer.cs.dll" />
-    <Content Include="obj\Debug\zoo.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\zoo.dll" />
-    <Content Include="obj\Debug\zoo.pdb" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
@@ -402,14 +386,6 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DatabaseModel.csdl" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DatabaseModel.msl" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DatabaseModel.ssdl" />
-    <Content Include="obj\Debug\Tsc.out" />
-    <Content Include="obj\Debug\zoo.csproj.CopyComplete" />
-    <Content Include="obj\Debug\zoo.csproj.CoreCompileInputs.cache" />
-    <Content Include="obj\Debug\zoo.csprojAssemblyReference.cache" />
     <Content Include="bin\ApplicationInsights.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
@@ -422,6 +398,14 @@
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="bin\zoo.dll.config" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -456,6 +440,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\SalesAssociate\Contact.cshtml" />
+    <Content Include="Views\SalesAssociate\Inventory.cshtml" />
+    <Content Include="Views\SalesAssociate\Sales.cshtml" />
+    <Content Include="Views\CareGiverHome\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -465,10 +453,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\SalesAssociate\Contact.cshtml" />
-    <Content Include="Views\SalesAssociate\Inventory.cshtml" />
-    <Content Include="Views\SalesAssociate\Sales.cshtml" />
-    <Content Include="Views\CareGiverHome\Index.cshtml" />
+    <Content Include="Views\CareGiverSuper\MyAnimals.cshtml" />
+    <Content Include="Views\CareGiverSuper\MyEmployees.cshtml" />
+    <Content Include="Views\CareGiverSuper\MyAttractions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
