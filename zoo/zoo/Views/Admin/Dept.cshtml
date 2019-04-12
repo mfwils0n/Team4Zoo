@@ -1,11 +1,11 @@
-﻿
+﻿@model IEnumerable<zoo.Models.Department>
+
 @{
+    ViewBag.Title = "Dept";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using zoo.Models
-@model Department
-
-<html lang="en">
+    <html lang="en">
+        <title>Departments</title>
 <head>
     <title>Admin Home</title>
     <meta charset="utf-8">
@@ -52,22 +52,52 @@
 }
 </style>
 </head>
+<h2>Dept</h2>
 <body>
-    <div class="container">
-        <div class="jumbotron">
-         <h4>Departments:</h4>
-          <p style="font-size: 12px"><input id="Radio1" type="radio" name="selDept" /> Sample Department 1</p>
-          <p style="font-size: 12px"><input id="Radio1" type="radio" name="selDept" /> Sample Department 2</p>
-           <div class="btn-group">
-               <button type="button" class="btn btn-primary">Go To Selected Department</button>
-               <button type="button" class="btn btn-primary">Edit Selected Department</button>
-               <button type="button" class="btn btn-primary">Create New Department</button>
-           </div>
-        </div>
+      <button class ="collapsible">Departments</button>
+        <div class ="content">
+        <table class="table">
+    <tr>
+        <th>
+            @Html.Label("Department")
+        </th>
+        <th>
+            @Html.Label("Department Revenue")
+        </th>
+        <th>
+            @Html.Label("Supervisor ID")
+        </th>
+        <th>
+            @Html.Label("Department Expenditure")
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.department_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dep_revenue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supervisor_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dep_expenditure)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Department_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Department_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Department_ID })
+        </td>
+    </tr>
+}
+
+</table>
     </div>
-    
-
-
 
 
 <script>
@@ -87,5 +117,3 @@ for (i = 0; i < coll.length; i++) {
 }
 </script>
 </body>
-</html>
-
