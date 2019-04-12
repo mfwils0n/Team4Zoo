@@ -168,6 +168,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CareGiverHomeController.cs" />
     <Compile Include="Controllers\CaregiverSuperController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -453,9 +454,10 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\CareGiverSuper\MyAnimals.cshtml" />
-    <Content Include="Views\CareGiverSuper\MyEmployees.cshtml" />
-    <Content Include="Views\CareGiverSuper\MyAttractions.cshtml" />
+    <Content Include="Views\SalesAssociate\Contact.cshtml" />
+    <Content Include="Views\SalesAssociate\Inventory.cshtml" />
+    <Content Include="Views\SalesAssociate\Sales.cshtml" />
+    <Content Include="Views\CareGiverHome\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
