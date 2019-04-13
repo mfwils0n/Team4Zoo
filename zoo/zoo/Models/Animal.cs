@@ -21,7 +21,7 @@ namespace zoo.Models
             this.Employees = new HashSet<Employee>();
             this.Food_Supply = new HashSet<Food_Supply>();
         }
-    
+            
         public System.Guid Animal_ID { get; set; }
         public string animal_name { get; set; }
         public Nullable<int> family { get; set; }
@@ -42,5 +42,18 @@ namespace zoo.Models
         public virtual ICollection<Animal_Medication_Care> Animal_Medication_Care { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<Food_Supply> Food_Supply { get; set; }
+    }
+
+    public struct MyAnimal
+    {
+        public string Name;
+        public string Family;
+        public string ExihibitionN;
+        public string ExihibitionL;
+
+        public MyAnimal(string name, string fam, string exn, string exl)
+        {
+            Name = name; Family = fam; ExihibitionN = exn; ExihibitionL = exl;
+        }
     }
 }
