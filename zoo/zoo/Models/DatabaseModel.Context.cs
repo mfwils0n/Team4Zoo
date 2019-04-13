@@ -47,5 +47,6 @@ namespace zoo.Models
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Zoo> Zoos { get; set; }
+        public DbSet<sysdiagram1> sysdiagram1 { get; set; }
     }
 }

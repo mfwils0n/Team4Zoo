@@ -1,8 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 @using zoo.Models
-@model Animal
+@model IEnumerable<Animal>
 
 <html lang="en">
 <head>
@@ -25,16 +26,20 @@
     <div class="container">
         <div class="panel-group">
             <div class="panel panel-info">
-                <div class="panel-heading">Announcements</div>
+                <div class="panel-heading">Animals Under My Care</div>
                 <div class="panel-body">
-                    <div>@</div>
-                    <blockquote class="blockquote mb-0">Cras justo odio</blockquote>
-                    <blockquote class="blockquote mb-0">Dapibus ac facilisis in</blockquote>
-                    <blockquote class="blockquote mb-0">Cras justo odio</blockquote>
-                    <blockquote class="blockquote mb-0">Dapibus ac facilisis in</blockquote>
-                    <blockquote class="blockquote mb-0">Cras justo odio</blockquote>
-                    <blockquote class="blockquote mb-0">Dapibus ac facilisis in</blockquote>
-                </div>
+
+                   
+                    <div>
+                        @foreach (var item in Model)
+                        {
+                            <blockquote class="blockquote mb-0">Name: @item.animal_name  Family: @item.family. Exhibit: @item.Exhibit_ID</blockquote>
+
+                        }
+                    </div>
+                    
+                        
+                    </div>
             </div>
         </div>
     </div>

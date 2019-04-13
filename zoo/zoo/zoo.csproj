@@ -251,6 +251,9 @@
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram1.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>

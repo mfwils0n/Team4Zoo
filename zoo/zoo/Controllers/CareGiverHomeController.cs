@@ -9,22 +9,22 @@ using zoo.Models;
 namespace zoo.Controllers
 {
     public class CareGiverHomeController : Controller
-    {
+   {
         // GET: CareGiverHome
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<Animal> AnimalList = ViewMyAnimals();
+            return View(AnimalList);
         }
         
-        public ViewResult ViewMyAnimals(Animal Model)
+        public IEnumerable<Animal> ViewMyAnimals()
         {
             using (team4zooEntities db = new team4zooEntities())
             {
-                Animal MyAnimals = new Animal();
                 System.Guid Employee_ID = (System.Guid)Session["Employee_ID"];
-                MyAnimals.EmployeesAnimals = (IList)db.Database.SqlQuery<Animal>("select * from zoo.Animal" + " where Assignee1_ID = '" + Employee_ID + "' or Assignee2_ID = '" + Employee_ID + "' or Assignee3_ID = '" + Employee_ID).ToList();
-                return View(MyAnimals);
+                return db.Animals.ToList().Where(x => (x.Assignee1_ID == Employee_ID || x.Assignee2_ID == Employee_ID || x.Assignee3_ID == Employee_ID));
             }
         }
+
     }
 }

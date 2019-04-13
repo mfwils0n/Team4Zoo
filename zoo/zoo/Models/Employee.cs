@@ -30,7 +30,7 @@ namespace zoo.Models
         public string ssn { get; set; }
         public decimal hourly_wage { get; set; }
         public System.DateTime hire_date { get; set; }
-        public int sick_days { get; set; }
+        public Nullable<int> sick_days { get; set; }
         public string phone_num { get; set; }
         public bool isActive { get; set; }
         public System.Guid Employee_ID { get; set; }
@@ -39,6 +39,7 @@ namespace zoo.Models
         public string username { get; set; }
         public Nullable<System.Guid> Role_ID { get; set; }
         public string display_name { get; set; }
+        public Nullable<System.Guid> Supervisor_ID { get; set; }
     
         public virtual ICollection<Animal_Medication_Care> Animal_Medication_Care { get; set; }
         public virtual Attraction Attraction { get; set; }
@@ -47,5 +48,11 @@ namespace zoo.Models
         public virtual ICollection<Maintenance> Maintenances { get; set; }
         public virtual Role Role { get; set; }
         public virtual ICollection<Animal> Animals { get; set; }
+        public virtual Employee Employee1 { get; set; }
+        public virtual Employee Employee2 { get; set; }
+        public virtual Employee Employee11 { get; set; }
+        public virtual Employee Employee3 { get; set; }
+        public virtual Employee Employee12 { get; set; }
+        public virtual Employee Employee4 { get; set; }
     }
 }

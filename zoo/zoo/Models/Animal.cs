@@ -10,7 +10,6 @@
 namespace zoo.Models
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     
     public partial class Animal
@@ -33,6 +32,9 @@ namespace zoo.Models
         public System.Guid Exhibit_ID { get; set; }
         public Nullable<System.Guid> Attraction_ID { get; set; }
         public bool isActive { get; set; }
+        public Nullable<System.Guid> Assignee1_ID { get; set; }
+        public Nullable<System.Guid> Assignee2_ID { get; set; }
+        public Nullable<System.Guid> Assignee3_ID { get; set; }
     
         public virtual ICollection<Animal_Feed_Care> Animal_Feed_Care { get; set; }
         public virtual Exhibit Exhibit { get; set; }
@@ -40,6 +42,5 @@ namespace zoo.Models
         public virtual ICollection<Animal_Medication_Care> Animal_Medication_Care { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<Food_Supply> Food_Supply { get; set; }
-        public IList EmployeesAnimals { get; set; }
     }
 }

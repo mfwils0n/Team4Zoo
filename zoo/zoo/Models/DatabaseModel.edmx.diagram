@@ -19,7 +19,7 @@
         <EntityTypeShape EntityType="team4zooModel.Food_Purchases" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="team4zooModel.Food_Supply" Width="1.5" PointX="7.5" PointY="22" IsExpanded="true" />
         <EntityTypeShape EntityType="team4zooModel.Inventory" Width="1.5" PointX="5.25" PointY="34.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="team4zooModel.Job" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="team4zooModel.Job" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="team4zooModel.Maintenance" Width="1.5" PointX="15.75" PointY="18" IsExpanded="true" />
         <EntityTypeShape EntityType="team4zooModel.Role" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="team4zooModel.Shop_Sale_Record" Width="1.5" PointX="7.5" PointY="27" IsExpanded="true" />
@@ -53,6 +53,10 @@
         <AssociationConnector Association="team4zooModel.FK_Shop_Sale_Record_Shops" ManuallyRouted="false" />
         <AssociationConnector Association="team4zooModel.Employee_Animal_Junction_Table" ManuallyRouted="false" />
         <AssociationConnector Association="team4zooModel.Food_Animal_Junction_table" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="team4zooModel.sysdiagram1" Width="1.5" PointX="0.75" PointY="3.75" />
+        <AssociationConnector Association="team4zooModel.FK_Department_Supervisor_ID" />
+        <AssociationConnector Association="team4zooModel.FK_Employee_Department1" />
+        <AssociationConnector Association="team4zooModel.FK_Employee_Employee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

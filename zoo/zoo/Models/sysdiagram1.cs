@@ -12,16 +12,12 @@ namespace zoo.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class sysdiagram1
     {
-        public Role()
-        {
-            this.Employees = new HashSet<Employee>();
-        }
-    
-        public System.Guid Role_ID { get; set; }
-        public string Job_Title { get; set; }
-    
-        public virtual ICollection<Employee> Employees { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
