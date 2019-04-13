@@ -41,10 +41,18 @@
                         }
                         if (Session["RoleName"].ToString().Equals("Admin"))
                         {
-                            <li>@Html.ActionLink("link1", "Index", "Home")</li>
-                            <li>@Html.ActionLink("link2", "Index", "Home")</li>
-                            <li>@Html.ActionLink("link3", "Index", "Home")</li>
-                            <li>@Html.ActionLink("link4", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Home", "Home", "Admin")</li>
+                            <li>@Html.ActionLink("Departments", "Dept", "Admin")</li>
+                            <li>@Html.ActionLink("Staff Management", "Index", "Admin")</li>
+                            <li>@Html.ActionLink("Maintenance", "Index", "Admin")</li>
+                            <li>@Html.ActionLink("Finance", "Index", "Admin")</li>
+                            <li>@Html.ActionLink("Reports", "Index", "Admin")</li>
+                        }
+                        if (Session["RoleName"].ToString().Equals("CaregiverSuper"))
+                        {
+                            <li>@Html.ActionLink("My Animals", "MyAnimals", "CaregiverSuper")</li>
+                            <li>@Html.ActionLink("My Employees", "MyEmployees", "CaregiverSuper")</li>
+                            <li>@Html.ActionLink("My Attractions", "MyAttractions", "CaregiverSuper")</li>
                         }
 
                     }
