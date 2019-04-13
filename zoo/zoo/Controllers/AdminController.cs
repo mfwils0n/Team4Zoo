@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using zoo.Models;
 
 namespace zoo.Controllers
 {
@@ -15,6 +17,16 @@ namespace zoo.Controllers
         }
 
         public ActionResult Dept()
+        {
+            team4zooEntities DB = new team4zooEntities();
+
+            List<Department> deptlist = DB.Departments.ToList();
+            return View(deptlist);
+            
+        }
+
+
+        public ActionResult Staff()
         {
             return View();
         }
