@@ -39,6 +39,11 @@
                             <li>@Html.ActionLink("Contact", "Contact", "SalesAssociate")</li>
                             <li>@Html.ActionLink("My Schedule", "Index", "SalesAssociate")</li>
                         }
+                        if (Session["RoleName"].ToString().Equals("SalesManager"))
+                        {
+                            <li>@Html.ActionLink("Inventory", "Inventory", "SalesManager")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "SalesManager")</li>
+                        }
                         if (Session["RoleName"].ToString().Equals("Admin"))
                         {
                             <li>@Html.ActionLink("Home", "Home", "Admin")</li>
