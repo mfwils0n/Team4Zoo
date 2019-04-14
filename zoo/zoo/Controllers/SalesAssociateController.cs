@@ -62,5 +62,20 @@ namespace zoo.Controllers
                 return View();
             }
         }
+        [HttpPost]
+        public ActionResult Sales(Inventory Model)
+        {
+            using (team4zooEntities db = new team4zooEntities())
+            {
+                var Price = db.Inventories.Where(x => x.Item_ID == Model.Item_ID).Select(y => y.price).FirstOrDefault();
+                var InStock = db.Inventories.Where(x => x.Item_ID == Model.Item_ID).Select(y => y.ordered_quantity).FirstOrDefault();
+                var ItemName = db.Inventories.Where(x => x.Item_ID == Model.Item_ID).Select(y => y.item_name).FirstOrDefault();
+                var amountLeft = InStock - Model.ordered_quantity;
+                var cost = Price * Model.ordered_quantity;
+                db.Database.ExecuteSqlCommand("update zoo.Inventory set ordered_quantity = '" + amountLeft + "' where Item_Id = '" + Model.Item_ID + "'");
+                ViewBag.Message = "Transaction Complete: " + Model.ordered_quantity + " " + ItemName + " costs $" + cost;  
+                return View();
+            }
+        }
     }
 }
