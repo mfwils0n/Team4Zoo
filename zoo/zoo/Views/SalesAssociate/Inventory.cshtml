@@ -1,4 +1,4 @@
-﻿@using zoo.Models
+@using zoo.Models
 @model Inventory
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,7 +28,7 @@
         <text style="align-content:center"> Check Inventory</text>
     </header>
     <div id="login-div">
-        @using (Html.BeginForm("Check", "SalesAssociate", FormMethod.Post))
+        @using (Html.BeginForm("Inventory", "SalesAssociate", FormMethod.Post))
         {
             <table>
                 <tr>
@@ -45,7 +45,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>@Html.ValidationMessageFor(model => model.Item_ID)</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>
@@ -63,6 +63,16 @@
                     </td>
                 </tr>
             </table>
+        }
+
+        @if (ViewBag.Message != null)
+        {
+            <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+
+            </script>
         }
     </div>
 </body>
