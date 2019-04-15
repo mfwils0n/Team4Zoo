@@ -21,14 +21,10 @@ namespace zoo.Controllers
 
         public ActionResult Inventory()
         {
-            ViewBag.Message = "Your current inventory page.";
-
             return View();
         }
         public ActionResult Contact()
         {
-            ViewBag.Message = "Keep a tab on your employees.";
-
             return View();
         }
 
@@ -61,6 +57,19 @@ namespace zoo.Controllers
                 ViewBag.Message = ItemInfo;
                 return View();
             }
+        }
+
+        [HttpPost]
+        public ActionResult ViewInventory(Inventory Model)
+        {
+            using (team4zooEntities db = new team4zooEntities())
+            {
+                List<Inventory> inventorylist = db.Inventories.ToList();
+                return View(inventorylist);
+            }
+
+                
+           
         }
     }
 }

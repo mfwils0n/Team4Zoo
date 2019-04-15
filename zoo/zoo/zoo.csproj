@@ -469,6 +469,7 @@
     <Content Include="Views\Admin\Dept.cshtml" />
     <Content Include="Views\SalesManager\Inventory.cshtml" />
     <Content Include="Views\SalesManager\Contact.cshtml" />
+    <Content Include="Views\SalesManager\ViewInventory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

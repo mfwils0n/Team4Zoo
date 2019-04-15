@@ -1,5 +1,6 @@
 ﻿@using zoo.Models
 @model Employee
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -63,10 +64,17 @@
                     </td>
                 </tr>
             </table>
+
+        }
+        @if (ViewBag.Message != null)
+        {
+            <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+
+            </script>
         }
     </div>
 </body>
 </html>
-
-
-
