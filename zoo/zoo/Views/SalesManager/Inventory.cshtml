@@ -28,7 +28,7 @@
         <text style="align-content:center"> Check Inventory</text>
     </header>
     <div id="login-div">
-        @using (Html.BeginForm("Check", "SalesManager", FormMethod.Post))
+        @using (Html.BeginForm("Inventory", "SalesManager", FormMethod.Post))
         {
             <table>
                 <tr>
@@ -45,7 +45,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>@Html.ValidationMessageFor(model => model.Item_ID)</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>

@@ -54,7 +54,10 @@ namespace zoo.Controllers
                 var ItemName = db.Inventories.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.item_name).FirstOrDefault();
 
                 String ItemInfo = ItemName + " Price: " + Price + " " + ", " + " In Stock: " + InStock;
-                ViewBag.Message = ItemInfo;
+                if (ItemName != null)
+                    ViewBag.Message = ItemInfo;
+                else
+                    ViewBag.Message = "No Item Found";
                 return View();
             }
         }
