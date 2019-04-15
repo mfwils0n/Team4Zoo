@@ -1,4 +1,4 @@
-﻿using zoo.Models;
+using zoo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,7 +58,10 @@ namespace zoo.Controllers
                 var ItemName = db.Inventories.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.item_name).FirstOrDefault();
 
                 String ItemInfo = ItemName + " Price: " + Price + " " + ", " + " In Stock: " + InStock;
-                ViewBag.Message = ItemInfo;
+                if (ItemName != null)
+                    ViewBag.Message = ItemInfo;
+                else
+                    ViewBag.Message = "No Item Found";
                 return View();
             }
         }
@@ -73,7 +76,8 @@ namespace zoo.Controllers
                 var amountLeft = InStock - Model.ordered_quantity;
                 var cost = Price * Model.ordered_quantity;
                 db.Database.ExecuteSqlCommand("update zoo.Inventory set ordered_quantity = '" + amountLeft + "' where Item_Id = '" + Model.Item_ID + "'");
-                ViewBag.Message = "Transaction Complete: " + Model.ordered_quantity + " " + ItemName + " costs $" + cost;  
+                if (ItemName != null)
+                    ViewBag.Message = "Transaction Complete: " + Model.ordered_quantity + " " + ItemName + " costs $" + cost;
                 return View();
             }
         }
