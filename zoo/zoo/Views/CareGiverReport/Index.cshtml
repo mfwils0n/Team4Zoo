@@ -52,8 +52,8 @@
                 <tr>
                     <td>
                         @Html.DropDownListFor(model => model.Item1.ElementAt(0).animal_name,
-                            new SelectList(Model.Item1),
-                            "Select Value")
+                         new SelectList(Model.Item1),
+                         "Select Value")
                     </td>
 
                     <td>
@@ -69,19 +69,7 @@
                     </td>
 
                 </tr>
-                @foreach (var item in Model.Item2)
-                {
-                    <tr>
-                        <td>@item.food_type</td>
-                        <td>@item.quantity_fed</td>
-                        <td>@item.date</td>
-                        <td>@item.time</td>
-                    </tr>
-                }
             }
-           
-
-
         </table>
     </div>
 </body>

@@ -1,1 +1,20 @@
-﻿
+﻿<div class="container">
+    <h2>Animals Under My Care</h2>
+    <table>
+        <tr>
+            <th>Food Type</th>
+            <th>Quantity in Pounds</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>@item.food_type</td>
+                    <td>@item.quantity_fed</td>
+                    <td>@item.date</td>
+                    <td>@item.time</td>
+                </tr>        
+        }
+    </table>
+</div>

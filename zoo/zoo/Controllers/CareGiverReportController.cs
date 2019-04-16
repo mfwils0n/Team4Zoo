@@ -10,10 +10,10 @@ namespace zoo.Controllers
     public class CareGiverReportController : Controller
     {
         // GET: CareGiverReport
-        public ActionResult Index (IEnumerable<Animal_Feed_Care> FeedReport)
+        public ActionResult Index ()
         {
             IEnumerable<Animal> MyAnimals = ViewMyAnimals();
-            var tuple = new Tuple<IEnumerable<Animal>, IEnumerable<Animal_Feed_Care>>(MyAnimals,FeedReport);
+            var tuple = new Tuple<IEnumerable<Animal>>(MyAnimals);
             return View(tuple);
         }
 
@@ -41,7 +41,7 @@ namespace zoo.Controllers
                 {
                     IEnumerable<Animal> MyAnimals = ViewMyAnimals();
                     IEnumerable<Animal_Feed_Care> FeedReport = db.Animal_Feed_Care.Where(x => x.Animal_ID == model.Animal_ID && (x.date >= from || x.date <= to)).ToList();
-                    var tuple = new Tuple<IEnumerable<Animal>, IEnumerable<Animal_Feed_Care>>(MyAnimals, FeedReport);
+                    var tuple = new Tuple<IEnumerable<Animal_Feed_Care>>( FeedReport);
                     return View(tuple);
                 }
 

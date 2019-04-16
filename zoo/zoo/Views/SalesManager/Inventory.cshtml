@@ -1,5 +1,5 @@
-@using zoo.Models
-@model Shop_Sale_Record
+﻿@using zoo.Models
+@model Inventory
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -24,28 +24,16 @@
     </style>
 </head>
 <body style="background-color:cornflowerblue">
-    <header style="font-size:3vw; margin-top:50px">
-        <text style="align-content:center"> Sales Entry</text>
+    <header style="font-size:3vw;">
+        <text style="align-content:center"> Check Inventory</text>
     </header>
     <div id="login-div">
-        @using (Html.BeginForm("Sales", "SalesAssociate", FormMethod.Post))
+        @using (Html.BeginForm("Inventory", "SalesManager", FormMethod.Post))
         {
             <table>
                 <tr>
                     <td></td>
-                    <td style="text-align:center">Sales Entry</td>
-                </tr>
-                <tr>
-                    <td> @Html.LabelFor(model => model.refund_flag)</td>
-                    <td> @Html.CheckBoxFor(model => model.refund_flag)</td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.LabelFor(model => model.Shop_ID)
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.Shop_ID)
-                    </td>
+                    <td style="text-align:center">Check For</td>
                 </tr>
                 <tr>
                     <td>
@@ -57,22 +45,14 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>@Html.ValidationMessageFor(model => model.Item_ID)</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>
-                        @Html.LabelFor(model => model.quantity)
+                        @Html.LabelFor(model => model.item_name)
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.quantity)
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.LabelFor(model => model.Customer_ID)
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.Customer_ID)
+                        @Html.EditorFor(model => model.item_name)
                     </td>
                 </tr>
                 <tr>
@@ -84,6 +64,7 @@
                 </tr>
             </table>
         }
+
         @if (ViewBag.Message != null)
         {
             <script type="text/javascript">
