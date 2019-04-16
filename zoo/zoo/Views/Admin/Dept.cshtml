@@ -4,8 +4,9 @@
     ViewBag.Title = "Dept";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <title>Departments</title>
     <html lang="en">
-        <title>Departments</title>
+        
 <head>
     <title>Admin Home</title>
     <meta charset="utf-8">
@@ -50,70 +51,119 @@
 .active:after {
   content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
+
+ p.pad {
+  border: 1px solid red; 
+  padding-top: 45px;
+}
 </style>
 </head>
-<h2>Dept</h2>
 <body>
-      <button class ="collapsible">Departments</button>
-        <div class ="content">
+    <p class="pad"></p>
+    <button class="collapsible">Departments</button>
+    <div class="content">
         <table class="table">
-    <tr>
-        <th>
-            @Html.Label("Department")
-        </th>
-        <th>
-            @Html.Label("Department Revenue")
-        </th>
-        <th>
-            @Html.Label("Supervisor ID")
-        </th>
-        <th>
-            @Html.Label("Department Expenditure")
-        </th>
+            <tr>
+                <th>
+                    @Html.Label("Department")
+                </th>
+                <th>
+                    @Html.Label("Department Revenue")
+                </th>
+                <th>
+                    @Html.Label("Supervisor ID")
+                </th>
+                <th>
+                    @Html.Label("Department Expenditure")
+                </th>
 
-        <th></th>
-    </tr>
+                <th></th>
+            </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.department_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dep_revenue)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Supervisor_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dep_expenditure)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Department_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Department_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Department_ID })
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.department_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dep_revenue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supervisor_ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dep_expenditure)
+                    </td>
+                    <td>
 
-</table>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">Edit</button>
+                            <button type="button" class="btn btn-primary">Details</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Message</button>
+                        </div>
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Please choose a message type and enter your message:</h4>
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle" id="msgbtn" aria-haspopup="true" aria-expanded="false" type="button" data-toggle="dropdown">
+                                                Message Type
+                                                <span class="caret"></span>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="msgbtn">
+                                                <a class="dropdown-item" href="#">To Supervisor</a>
+                                                <a class="dropdown-item" href="#">Announcement</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="5" id="message"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Send</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+
+            }
+
+        </table>
+        <button type="button" class="btn btn-primary" onclick="Redirect_addDept()">Add New</button>
     </div>
 
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
 
-<script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-    }
-  });
-}
-</script>
+
+        function Redirect_addDept() {
+            location.href = "addDept";
+        }
+    </script>
 </body>
+</html>
