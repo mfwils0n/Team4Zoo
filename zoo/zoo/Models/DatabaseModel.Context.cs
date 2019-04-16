@@ -38,7 +38,7 @@ namespace zoo.Models
         public DbSet<Family_Name> Family_Name { get; set; }
         public DbSet<Food_Purchases> Food_Purchases { get; set; }
         public DbSet<Food_Supply> Food_Supply { get; set; }
-        public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Maintenance> Maintenances { get; set; }
         public DbSet<Role> Roles { get; set; }

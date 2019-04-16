@@ -21,14 +21,10 @@ namespace zoo.Controllers
 
         public ActionResult Inventory()
         {
-            ViewBag.Message = "Your current inventory page.";
-
             return View();
         }
         public ActionResult Contact()
         {
-            ViewBag.Message = "Keep a tab on your employees.";
-
             return View();
         }
 
@@ -53,14 +49,37 @@ namespace zoo.Controllers
         {
             using (team4zooEntities db = new team4zooEntities())
             {
-                var Price = db.Inventories.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.price).FirstOrDefault();
-                var InStock = db.Inventories.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.ordered_quantity).FirstOrDefault();
-                var ItemName = db.Inventories.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.item_name).FirstOrDefault();
+                var Price = db.Inventory.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.price).FirstOrDefault();
+                var InStock = db.Inventory.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.ordered_quantity).FirstOrDefault();
+                var ItemName = db.Inventory.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.item_name).FirstOrDefault();
 
                 String ItemInfo = ItemName + " Price: " + Price + " " + ", " + " In Stock: " + InStock;
-                ViewBag.Message = ItemInfo;
+                if (ItemName != null)
+                    ViewBag.Message = ItemInfo;
+                else
+                    ViewBag.Message = "No Item Found";
                 return View();
             }
         }
+
+        public ActionResult Shop()
+        {
+            team4zooEntities DB = new team4zooEntities();
+
+            List<Shop> shoplist = DB.Shops.ToList();
+            return View(shoplist);
+        }
+
+        public ActionResult ViewInventory()
+        {
+            team4zooEntities db = new team4zooEntities();
+            
+            List<Inventory> inventorylist = db.Inventory.ToList();
+            return View(inventorylist);
+        }
+
+                
+           
+        
     }
 }

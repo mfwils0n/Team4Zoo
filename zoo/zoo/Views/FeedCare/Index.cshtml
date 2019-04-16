@@ -1,0 +1,99 @@
+﻿@using zoo.Models
+@model Tuple<IEnumerable<Animal>,IEnumerable<Food_Supply>>
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+    </head>
+    <body>
+        <div>
+            <table class="table">
+                @using (Html.BeginForm("FoodEntery", "FeedCare", FormMethod.Post))
+                {
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr><td><h3>Food Entery</h3></td><td></td><td></td><td></tr>
+                    <tr>
+                        <th>Animal Name</th>
+                        <th>Food Type</th>
+                        <th>Quantity in Pounds</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            @Html.DropDownListFor(model => model.Item1.ElementAt(0).animal_name,
+                         new SelectList(Model.Item1),
+                         "Select Value")
+                        </td>
+
+                        <td>
+                            @Html.DropDownListFor(model => model.Item2.ElementAt(0).Food_type,
+                         new SelectList(Model.Item2),
+                         "Select Value")
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.Item2.ElementAt(0).quantity_fed),
+                        </td>
+
+                        <td>
+                            <input type="Submit" value="Save Changes" />
+                        </td>
+
+                    </tr>
+                }
+                @using (Html.BeginForm("MedicationEntery", "FeedCare", FormMethod.Post))
+                {
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr><td><h3>Medication Entery</h3></td><td></td><td></td><td></tr>
+                    <tr>
+                        <th>Animal Name</th>
+                        <th>Medication</th>
+                        <th>dose</th>
+                        <th>Vet</th>
+                        <th>Discription</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            @Html.DropDownListFor(model => model.Item1.ElementAt(0).animal_name,
+                        new SelectList(Model.Item1),
+                        "Select Value")
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.Item1.ElementAt(0).medication)
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.Item1.ElementAt(0).dose)
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.Item1.ElementAt(0).vet)
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.Item1.ElementAt(0).description)
+                        </td>
+
+                        <td>
+                            <input type="Submit" value="Save Changes" />
+                        </td>
+
+                    </tr>
+                }
+            </table>
+        </div>
+    </body>
+</html>

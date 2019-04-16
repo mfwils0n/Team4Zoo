@@ -1,5 +1,5 @@
 @using zoo.Models
-@model Inventory
+@model Shop_Sale_Record
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -36,6 +36,18 @@
                     <td style="text-align:center">Sales Entry</td>
                 </tr>
                 <tr>
+                    <td> @Html.LabelFor(model => model.refund_flag)</td>
+                    <td> @Html.CheckBoxFor(model => model.refund_flag)</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Shop_ID)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Shop_ID)
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         @Html.LabelFor(model => model.Item_ID)
                     </td>
@@ -49,10 +61,18 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.LabelFor(model => model.ordered_quantity)
+                        @Html.LabelFor(model => model.quantity)
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.ordered_quantity)
+                        @Html.EditorFor(model => model.quantity)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Customer_ID)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Customer_ID)
                     </td>
                 </tr>
                 <tr>

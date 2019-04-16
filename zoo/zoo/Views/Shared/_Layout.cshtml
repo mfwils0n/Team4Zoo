@@ -27,22 +27,24 @@
                         if (Session["RoleName"].ToString().Equals("Caregiver"))
                         {
                             <li>@Html.ActionLink("Home", "Index", "CareGiverHome")</li>
-                            <li>@Html.ActionLink("My Animals", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Food and Medication", "Index", "FeedCare")</li>
                             <li>@Html.ActionLink("Exhibits and Attractions", "Index", "Home")</li>
-                            <li>@Html.ActionLink("My Schedule", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Reports", "Index", "CareGiverReport")</li>
 
                         }
                         if (Session["RoleName"].ToString().Equals("SalesAssociate"))
                         {
-                            <li>@Html.ActionLink("Sales", "Sales", "SalesAssociate")</li>
+                            <li>@Html.ActionLink("Ticket Sales", "TicketSales", "SalesAssociate")</li>
+                            <li>@Html.ActionLink("Shop Sales", "Sales", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Inventory", "Inventory", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "SalesAssociate")</li>
-                            <li>@Html.ActionLink("My Schedule", "Index", "SalesAssociate")</li>
                         }
                         if (Session["RoleName"].ToString().Equals("SalesManager"))
                         {
-                            <li>@Html.ActionLink("Inventory", "Inventory", "SalesManager")</li>
+                            <li>@Html.ActionLink("Lookup Item", "Inventory", "SalesManager")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "SalesManager")</li>
+                            <li>@Html.ActionLink("Shops", "Shop", "SalesManager")</li>
+                            <li>@Html.ActionLink("View Inventory", "ViewInventory", "SalesManager")</li>
                         }
                         if (Session["RoleName"].ToString().Equals("Admin"))
                         {

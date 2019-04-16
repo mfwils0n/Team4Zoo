@@ -1,0 +1,77 @@
+﻿@using zoo.Models
+@model Tuple < IEnumerable < Animal >, IEnumerable<Animal_Feed_Care>>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>>
+</head>
+<body>
+    <div>
+        <table>
+            @using (Html.BeginForm("ViewFoodReport", "CareGiverReport", FormMethod.Post))
+            {
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td><h3>Food Reports</h3></td><td></td><td></td><td></tr>
+                <tr>
+                    <th>From</th>
+                    <th></th>
+                    <th>To</th>
+                    <th></th>
+                </tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr>
+                    <td>
+                        @Html.DropDownListFor(model => model.Item1.ElementAt(0).animal_name,
+                         new SelectList(Model.Item1),
+                         "Select Value")
+                    </td>
+
+                    <td>
+                        <input type="date" name="from" id="from">
+                    </td>
+
+                    <td>
+                        <input type="date" name="to" id="to">
+                    </td>
+
+                    <td>
+                        <input type="submit" value="submit" />
+                    </td>
+
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
+
