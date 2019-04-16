@@ -62,6 +62,14 @@ namespace zoo.Controllers
             }
         }
 
+        public ActionResult Shop()
+        {
+            team4zooEntities DB = new team4zooEntities();
+
+            List<Shop> shoplist = DB.Shops.ToList();
+            return View(shoplist);
+        }
+
         [HttpPost]
         public ActionResult ViewInventory(Inventory Model)
         {

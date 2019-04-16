@@ -472,16 +472,14 @@
     <Content Include="Views\CaregiverSuper\MyEmployees.cshtml" />
     <Content Include="Views\Admin\Staff.cshtml" />
     <Content Include="Views\Admin\Dept.cshtml" />
-
     <Content Include="Views\FeedCare\Index.cshtml" />
     <Content Include="Views\CareGiverHome\Index.cshtml" />
     <Content Include="Views\CareGiverReport\Index.cshtml" />
     <Content Include="Views\CareGiverReport\Report.cshtml" />
-
     <Content Include="Views\SalesManager\Inventory.cshtml" />
     <Content Include="Views\SalesManager\Contact.cshtml" />
     <Content Include="Views\SalesManager\ViewInventory.cshtml" />
-
+    <Content Include="Views\SalesManager\Shop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
