@@ -43,8 +43,8 @@ namespace zoo.Controllers
 
             return View();
         }
-            [HttpPost]
-           public ActionResult Contact(Employee Model)
+        [HttpPost]
+        public ActionResult Contact(Employee Model)
         {
             using (team4zooEntities db = new team4zooEntities())
             {
@@ -57,16 +57,15 @@ namespace zoo.Controllers
                     ViewBag.Message = "No one by that name was found";
                 return View();
             }
-       }
-
+        }
         [HttpPost]
         public ActionResult Inventory(Inventory Model)
         {
             using (team4zooEntities db = new team4zooEntities())
             {
-                var Price = db.Inventories.Where(x => x.item_name == Model.item_name).Select(y => y.price).FirstOrDefault();
-                var InStock = db.Inventories.Where(x => x.item_name == Model.item_name).Select(y => y.ordered_quantity).FirstOrDefault();
-                var ItemName = db.Inventories.Where(x => x.item_name == Model.item_name).Select(y => y.item_name).FirstOrDefault();
+                var Price = db.Inventory.Where(x => x.item_name == Model.item_name).Select(y => y.price).FirstOrDefault();
+                var InStock = db.Inventory.Where(x => x.item_name == Model.item_name).Select(y => y.ordered_quantity).FirstOrDefault();
+                var ItemName = db.Inventory.Where(x => x.item_name == Model.item_name).Select(y => y.item_name).FirstOrDefault();
 
                 String ItemInfo = ItemName + " Price: " + Price + " " + ", " + " In Stock: " + InStock;
                 if (ItemName != null)
@@ -83,11 +82,11 @@ namespace zoo.Controllers
             {
                 var name = itemName;
                 var number = phoneNum;
-                var ID = db.Inventories.Where(x => x.item_name == itemName).Select(y => y.Item_ID).FirstOrDefault();
+                var ID = db.Inventory.Where(x => x.item_name == itemName).Select(y => y.Item_ID).FirstOrDefault();
                 var Member = db.Customers.Where(x => x.phone_number == number).Select(y => y.Customer_ID).FirstOrDefault();
-                var Price = db.Inventories.Where(x => x.Item_ID == ID).Select(y => y.price).FirstOrDefault();
-                var InStock = db.Inventories.Where(x => x.Item_ID == ID).Select(y => y.ordered_quantity).FirstOrDefault();
-                var ItemName = db.Inventories.Where(x => x.Item_ID == ID).Select(y => y.item_name).FirstOrDefault();
+                var Price = db.Inventory.Where(x => x.Item_ID == ID).Select(y => y.price).FirstOrDefault();
+                var InStock = db.Inventory.Where(x => x.Item_ID == ID).Select(y => y.ordered_quantity).FirstOrDefault();
+                var ItemName = db.Inventory.Where(x => x.Item_ID == ID).Select(y => y.item_name).FirstOrDefault();
                 var amountPurchased = Model.quantity;
                 var cost = Price * Model.quantity;
                 var amountLeft = InStock;
@@ -135,10 +134,10 @@ namespace zoo.Controllers
             {
                 var name = itemName;
                 var number = phoneNum;
-                var ID = db.Inventories.Where(x => x.item_name == itemName).Select(y => y.Item_ID).FirstOrDefault();
+                var ID = db.Inventory.Where(x => x.item_name == itemName).Select(y => y.Item_ID).FirstOrDefault();
                 var Member = db.Customers.Where(x => x.phone_number == number).Select(y => y.Customer_ID).FirstOrDefault();
-                var InStock = db.Inventories.Where(x => x.Item_ID == ID).Select(y => y.ordered_quantity).FirstOrDefault();
-                var Price = db.Inventories.Where(x => x.Item_ID == ID).Select(y => y.price).FirstOrDefault();
+                var InStock = db.Inventory.Where(x => x.Item_ID == ID).Select(y => y.ordered_quantity).FirstOrDefault();
+                var Price = db.Inventory.Where(x => x.Item_ID == ID).Select(y => y.price).FirstOrDefault();
                 var cost = Model2.quantity * Price;
                 var amountLeft = InStock - Model2.quantity;
                 decimal discount = 0;
