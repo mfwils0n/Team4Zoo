@@ -120,13 +120,16 @@ namespace zoo.Controllers
             }
         }
 
-        public ActionResult editdept()
+
+        [HttpGet]
+        public ActionResult editDept(string id)
         {
             using (team4zooEntities DB = new team4zooEntities())
             {
-                List<Department> deptlist = DB.Departments.ToList();
+                Guid ID = new Guid(id);
+                Department department = DB.Departments.Single(Department => Department.Department_ID == ID);
 
-                return View(deptlist);
+                return View(department);
             }
         }
 
