@@ -34,16 +34,17 @@
                         }
                         if (Session["RoleName"].ToString().Equals("SalesAssociate"))
                         {
-                             <li>@Html.ActionLink("Ticket Sales", "TicketSales", "SalesAssociate")</li>
+                            <li>@Html.ActionLink("Ticket Sales", "TicketSales", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Shop Sales", "Sales", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Inventory", "Inventory", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "SalesAssociate")</li>
                         }
                         if (Session["RoleName"].ToString().Equals("SalesManager"))
                         {
-                            <li>@Html.ActionLink("Item Lookup", "Inventory", "SalesManager")</li>
+                            <li>@Html.ActionLink("Lookup Item", "Inventory", "SalesManager")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "SalesManager")</li>
-                            <li>@Html.ActionLink("View All Inventory", "ViewInventory", "SalesManager")</li>
+                            <li>@Html.ActionLink("Shops", "Shop", "SalesManager")</li>
+                            <li>@Html.ActionLink("View Inventory", "ViewInventory", "SalesManager")</li>
                         }
                         if (Session["RoleName"].ToString().Equals("Admin"))
                         {
@@ -57,7 +58,7 @@
                         if (Session["RoleName"].ToString().Equals("CaregiverSuper"))
                         {
                             <li>@Html.ActionLink("My Animals", "MyAnimals", "CaregiverSuper")</li>
-                            <li>@Html.ActionLink("My Employees", "MyEmployees", "CaregiverSuper")</li>
+                            <li>@Html.ActionLink("My Employees", "GetEmployees", "CaregiverSuper")</li>
                             <li>@Html.ActionLink("My Attractions", "MyAttractions", "CaregiverSuper")</li>
                         }
 

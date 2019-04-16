@@ -9,32 +9,36 @@ namespace zoo.Controllers
 {
     public class CaregiverSuperController : Controller
     {
-        // GET: CaregiverSuper
+
+        // GET: CareGiverHome
         public ActionResult Index()
         {
+            //            IList<Animal> AnimalList = MyAnimals();
+            //            List<MyAnimal> Animals = new List<MyAnimal>();
+            //            foreach (var item in AnimalList)
+            //           {
+            //                Animals.Add(new MyAnimal(item.animal_name, GetFamilyName(item.family), GetExihibitN(item.Exhibit_ID), GetExihibitL(item.Exhibit_ID)));
+            //            }
+            //            return View(Animals);
             return View();
         }
-        public ActionResult Login()
-        {
-            return RedirectToAction("Index", "Login");
-        }
-        public ActionResult MyAnimals()
-        {
-            ViewBag.Message = "Your animals page.";
 
-            return View();
-        }
-        public ActionResult MyEmployees()
+        public IList<Employee> GetEmployees(Employee Manager)
         {
-            ViewBag.Message = "Your people page.";
+            using (team4zooEntities db = new team4zooEntities())
+            {
+                System.Guid MyEmployee_ID = (System.Guid)Session["Employee_ID"];
+                var result = new List<Employee>();
 
-            return View();
-        }
-        public ActionResult MyAttractions()
-        {
-            ViewBag.Message = "Your attractions page.";
+                var employees = db.Employees.Where(e => e.Supervisor_ID == MyEmployee_ID).ToList();
 
-            return View();
+                foreach (var employee in employees)
+                {
+                    result.Add(employee);
+                    result.AddRange(GetEmployees(employee));
+                }
+                return result;
+            }
         }
     }
 }

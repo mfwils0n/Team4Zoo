@@ -1,11 +1,11 @@
-﻿@model IEnumerable<zoo.Models.Inventory>
+﻿@model IEnumerable<zoo.Models.Shop>
 
 @{
-    ViewBag.Title = "ViewInventory";
+    ViewBag.Title = "Shop";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
     <html lang="en">
-        <title>Inventory</title>
+        <title>Shops</title>
 <head>
     <title>SalesManager Home</title>
     <meta charset="utf-8">
@@ -52,20 +52,20 @@
 }
 </style>
 </head>
-<h2>ViewInventory</h2>
+<h2>Shop</h2>
 <body>
-    <button class="collapsible">Inventory</button>
+    <button class="collapsible">Shops</button>
     <div class="content">
         <table class="table">
             <tr>
                 <th>
-                    @Html.Label("Item Name")
+                    @Html.Label("Shop Name")
                 </th>
                 <th>
-                    @Html.Label("Price")
+                    @Html.Label("Shop Location")
                 </th>
                 <th>
-                    @Html.Label("Quantity")
+                    @Html.Label("Supervisor ID")
                 </th>
 
                 <th></th>
@@ -74,18 +74,18 @@
 @foreach (var item in Model){
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.item_name)
+            @Html.DisplayFor(modelItem => item.shop_name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.price)
+            @Html.DisplayFor(modelItem => item.shop_loc)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ordered_quantity)
+            @Html.DisplayFor(modelItem => item.Manager_Employee_ID)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Item_ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Item_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Item_ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Shop_ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Shop_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Shop_ID })
         </td>
     </tr>
 }
