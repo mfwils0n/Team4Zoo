@@ -178,6 +178,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CareGiverBaseAttractionController.cs" />
     <Compile Include="Controllers\CareGiverHomeController.cs" />
     <Compile Include="Controllers\CareGiverReportController.cs" />
     <Compile Include="Controllers\CaregiverSuperController.cs" />
@@ -408,6 +409,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CareGiverBaseAttraction\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
