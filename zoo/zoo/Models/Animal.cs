@@ -52,6 +52,10 @@ namespace zoo.Models
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<Food_Supply> Food_Supply { get; set; }
 
+        public string assignee1_name { get; set; }
+        public string assignee2_name { get; set; }
+        public string assignee3_name { get; set; }
+
         public override string ToString()
         {
             return this.animal_name;

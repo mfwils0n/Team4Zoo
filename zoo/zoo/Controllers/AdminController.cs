@@ -12,14 +12,11 @@ namespace zoo.Controllers
 {
     public class AdminController : Controller
     {
-
-        
         // GET: Admin
         public ActionResult Home()
         {
             return View();
         }
-
 
         public ActionResult Dept()
         {
@@ -30,9 +27,6 @@ namespace zoo.Controllers
             return View(deptlist);
             }
         }
-
-
-
         [HttpGet] //HTTP GET to ensure addDept is reached
         public ActionResult AddDept()
         {
