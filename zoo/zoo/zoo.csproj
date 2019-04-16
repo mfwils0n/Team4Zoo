@@ -401,7 +401,6 @@
     <Content Include="Views\CareGiverReport\Report.cshtml" />
     <Content Include="Views\CareGiverReport\MedicationReport.cshtml" />
     <Content Include="Views\CareGiverReport\Report.cshtml" />
-    <Content Include="Views\SalesManager\Inventory.cshtml" />
     <Content Include="Views\SalesManager\Contact.cshtml" />
     <Content Include="Views\SalesManager\ViewInventory.cshtml" />
     <Content Include="Views\SalesManager\Shop.cshtml" />
