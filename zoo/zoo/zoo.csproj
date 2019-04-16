@@ -405,6 +405,7 @@
     <Content Include="Views\SalesManager\ViewInventory.cshtml" />
     <Content Include="Views\SalesManager\Shop.cshtml" />
     <Content Include="Views\SalesAssociate\TicketSales.cshtml" />
+    <Content Include="Views\SalesManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,7 +12,22 @@ namespace zoo.Controllers
         // GET: SalesManager
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<Employee> EmployeeList = ViewMyEmployees();
+            List<MyEmployee> Employees = new List<MyEmployee>();
+            foreach (var person in EmployeeList)
+            {
+                Employees.Add(new MyEmployee(person.f_name, person.l_name, person.email, person.phone_num));
+            }
+            return View(Employees);
+        }
+
+        public IEnumerable<Employee> ViewMyEmployees()
+        {
+            using (team4zooEntities db = new team4zooEntities())
+            {
+                System.Guid MyEmployee_ID = (System.Guid)Session["Employee_ID"];
+                return db.Employees.ToList().Where(x => (x.Supervisor_ID == MyEmployee_ID));
+            }
         }
         public ActionResult Login()
         {
