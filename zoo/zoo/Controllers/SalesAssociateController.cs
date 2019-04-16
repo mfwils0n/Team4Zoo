@@ -21,6 +21,11 @@ namespace zoo.Controllers
 
             return View();
         }
+        public ActionResult AddMember()
+        {
+
+            return View();
+        }
 
         public ActionResult Sales()
         {
@@ -59,9 +64,9 @@ namespace zoo.Controllers
         {
             using (team4zooEntities db = new team4zooEntities())
             {
-                var Price = db.Inventory.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.price).FirstOrDefault();
-                var InStock = db.Inventory.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.ordered_quantity).FirstOrDefault();
-                var ItemName = db.Inventory.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.item_name).FirstOrDefault();
+                var Price = db.Inventories.Where(x => x.item_name == Model.item_name).Select(y => y.price).FirstOrDefault();
+                var InStock = db.Inventories.Where(x => x.item_name == Model.item_name).Select(y => y.ordered_quantity).FirstOrDefault();
+                var ItemName = db.Inventories.Where(x => x.item_name == Model.item_name).Select(y => y.item_name).FirstOrDefault();
 
                 String ItemInfo = ItemName + " Price: " + Price + " " + ", " + " In Stock: " + InStock;
                 if (ItemName != null)
@@ -72,15 +77,33 @@ namespace zoo.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Sales(Shop_Sale_Record Model)
+        public ActionResult Sales(Shop_Sale_Record Model, string itemName, string phoneNum)
         {
             using (team4zooEntities db = new team4zooEntities())
             {
-                var Price = db.Inventory.Where(x => x.Item_ID == Model.Item_ID).Select(y => y.price).FirstOrDefault();
-                var InStock = db.Inventory.Where(x => x.Item_ID == Model.Item_ID).Select(y => y.ordered_quantity).FirstOrDefault();
-                var ItemName = db.Inventory.Where(x => x.Item_ID == Model.Item_ID).Select(y => y.item_name).FirstOrDefault();
+                var name = itemName;
+                var number = phoneNum;
+                var ID = db.Inventories.Where(x => x.item_name == itemName).Select(y => y.Item_ID).FirstOrDefault();
+                var Member = db.Customers.Where(x => x.phone_number == number).Select(y => y.Customer_ID).FirstOrDefault();
+                var Price = db.Inventories.Where(x => x.Item_ID == ID).Select(y => y.price).FirstOrDefault();
+                var InStock = db.Inventories.Where(x => x.Item_ID == ID).Select(y => y.ordered_quantity).FirstOrDefault();
+                var ItemName = db.Inventories.Where(x => x.Item_ID == ID).Select(y => y.item_name).FirstOrDefault();
                 var amountPurchased = Model.quantity;
                 var cost = Price * Model.quantity;
+                var amountLeft = InStock;
+                if (Model.refund_flag == false)
+                {
+                    amountLeft = InStock - Model.quantity;
+                }
+                else
+                {
+                    amountLeft = InStock + Model.quantity;
+                }
+                Model.Item_ID = ID;
+                if (number == "")
+                { Guid id = new Guid("7117d230-9bb6-4c3b-8d38-2a9b9e8092b6");
+                    Member = id;
+                } 
                 if (InStock >= amountPurchased)
                 {
                     Shop_Sale_Record NewEntry = new Shop_Sale_Record();
@@ -88,12 +111,14 @@ namespace zoo.Controllers
                     NewEntry.Shop_ID = Model.Shop_ID;
                     NewEntry.Item_ID = Model.Item_ID;
                     NewEntry.quantity = Model.quantity;
-                    NewEntry.Customer_ID = Model.Customer_ID;
+                    NewEntry.Customer_ID = Member;
                     NewEntry.refund_flag = Model.refund_flag;
                     NewEntry.date = DateTime.Today;
                     db.Shop_Sale_Record.Add(NewEntry);
                     db.SaveChanges();
-                    if(Model.refund_flag == false)
+                    db.Database.ExecuteSqlCommand("update zoo.Inventory set ordered_quantity = '" + amountLeft + "' where Item_Id = '" + Model.Item_ID + "'");
+
+                    if (Model.refund_flag == false)
                     ViewBag.Message = "Transaction Complete: " + Model.quantity + " " + ItemName + " costs $" + cost;
                     else
                         ViewBag.Message = "Succsefully Refunded: " + Model.quantity + " " + ItemName + " for $" + cost;
@@ -104,49 +129,76 @@ namespace zoo.Controllers
             }
         }
         [HttpPost]
-        public ActionResult TicketSales(Shop_Sale_Record Model, BoxOffice_Records Model2)
+        public ActionResult TicketSales(Shop_Sale_Record Model, BoxOffice_Records Model2, string itemName, string phoneNum)
         {
             using (team4zooEntities db = new team4zooEntities())
             {
-                var InStock = db.Inventory.Where(x => x.Item_ID == Model.Item_ID).Select(y => y.ordered_quantity).FirstOrDefault();
-                var Price = db.Inventory.Where(x => x.Item_ID == Model.Item_ID).Select(y => y.price).FirstOrDefault();
-                var cost = Model.quantity * Price;
-                var amountLeft = InStock - Model.quantity;
-                decimal discount = 3;
-                var totalCost = cost - discount;
+                var name = itemName;
+                var number = phoneNum;
+                var ID = db.Inventories.Where(x => x.item_name == itemName).Select(y => y.Item_ID).FirstOrDefault();
+                var Member = db.Customers.Where(x => x.phone_number == number).Select(y => y.Customer_ID).FirstOrDefault();
+                var InStock = db.Inventories.Where(x => x.Item_ID == ID).Select(y => y.ordered_quantity).FirstOrDefault();
+                var Price = db.Inventories.Where(x => x.Item_ID == ID).Select(y => y.price).FirstOrDefault();
+                var cost = Model2.quantity * Price;
+                var amountLeft = InStock - Model2.quantity;
+                decimal discount = 0;
+                var totalCost = cost;
+                Guid NM = new Guid("00000000-0000-0000-0000-000000000000");
+                var nonMember = NM;
                 Guid dept = new Guid("7203f98e-e4dc-4edd-b221-98b5855fd4e3");
-                if (Model.refund_flag == true)
+                if ( Member != nonMember)
                 {
+                    discount = cost / 10;
+                    totalCost = cost - discount;
                     BoxOffice_Records NewEntry = new BoxOffice_Records();
                     NewEntry.Sale_ID = System.Guid.NewGuid();
                     NewEntry.Department_ID = dept;
                     NewEntry.membership_discount = discount;
-                    NewEntry.quantity = Model.quantity;
-                    NewEntry.Customer_ID = Model.Customer_ID;
+                    NewEntry.quantity = Model2.quantity;
+                    NewEntry.Customer_ID = Member;
                     NewEntry.tot_amt_paid_after_discounts = totalCost;
                     NewEntry.date = DateTime.Today;
                     db.BoxOffice_Records.Add(NewEntry);
                     db.SaveChanges();
-                    ViewBag.Message = "Transaction Completed";
-                    db.Database.ExecuteSqlCommand("update zoo.Inventory set ordered_quantity = '" + amountLeft + "' where Item_Id = '" + Model.Item_ID + "'");
+                    ViewBag.Message = "Transaction Completed: Cost: " + cost + " Member Discount: " + discount + " Total Cost: " + totalCost;
+                    db.Database.ExecuteSqlCommand("update zoo.Inventory set ordered_quantity = '" + amountLeft + "' where Item_Id = '" + ID + "'");
 
                 }
                 else
                 {
+                    Guid id = new Guid("7117d230-9bb6-4c3b-8d38-2a9b9e8092b6");
+                    Member = id;
                     BoxOffice_Records NewEntry = new BoxOffice_Records();
                     NewEntry.Sale_ID = System.Guid.NewGuid();
                     NewEntry.Department_ID = dept;
                     NewEntry.membership_discount = discount;
-                    NewEntry.quantity = Model.quantity;
-                    NewEntry.Customer_ID = Model.Customer_ID;
+                    NewEntry.quantity = Model2.quantity;
+                    NewEntry.Customer_ID = Member;
                     NewEntry.tot_amt_paid_after_discounts = totalCost;
                     NewEntry.date = DateTime.Today;
                     db.BoxOffice_Records.Add(NewEntry);
                     db.SaveChanges();
-                    db.Database.ExecuteSqlCommand("update zoo.Inventory set ordered_quantity = '" + amountLeft + "' where Item_Id = '" + Model.Item_ID + "'");
-                    ViewBag.Message = "Transaction Completed";
+                    db.Database.ExecuteSqlCommand("update zoo.Inventory set ordered_quantity = '" + amountLeft + "' where Item_Id = '" + ID + "'");
+                    ViewBag.Message = "Transaction Completed: cost: "+ cost;
                 }
                
+                return View();
+            }
+        }
+        [HttpPost]
+        public ActionResult AddMember(Customer Model)
+        {
+            using (team4zooEntities db = new team4zooEntities())
+            {
+                Customer NewEntry = new Customer();
+                NewEntry.Customer_ID = System.Guid.NewGuid();
+                NewEntry.f_name =  Model.f_name;
+                NewEntry.l_name = Model.l_name;
+                NewEntry.phone_number = Model.phone_number;
+                NewEntry.membership = true;
+                db.Customers.Add(NewEntry);
+                db.SaveChanges();
+                ViewBag.Message = "Member Added";
                 return View();
             }
         }
