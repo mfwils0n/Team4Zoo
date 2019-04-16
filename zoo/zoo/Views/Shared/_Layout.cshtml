@@ -34,8 +34,9 @@
                         }
                         if (Session["RoleName"].ToString().Equals("SalesAssociate"))
                         {
-                            <li>@Html.ActionLink("Ticket Sales", "TicketSales", "SalesAssociate")</li>
+                           <li>@Html.ActionLink("Ticket Sales", "TicketSales", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Shop Sales", "Sales", "SalesAssociate")</li>
+                            <li>@Html.ActionLink("Add Member", "AddMember", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Inventory", "Inventory", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "SalesAssociate")</li>
                         }
