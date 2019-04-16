@@ -133,6 +133,63 @@ namespace zoo.Controllers
             }
         }
 
+        //This creates a SQL ready department object and adds to database
+        public void SaveDepartment(Department department)
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = "Server=den1.mssql8.gear.host;Database=team4zoo;Uid=team4zoo;Pwd=Ji627i1J-x5?"; //Connection String with login info.
+
+                //Call Query
+                SqlCommand cmd = new SqlCommand("SaveDepartment", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //Set Parameters
+                SqlParameter paramDName = new SqlParameter();//DepartmentName
+                paramDName.ParameterName = "@department_name";
+                paramDName.Value = department.department_name;
+                cmd.Parameters.Add(paramDName);
+
+                SqlParameter paramID = new SqlParameter();//ZooName
+                paramID.ParameterName = "@Department_ID";
+                paramID.Value = department.Department_ID;
+                cmd.Parameters.Add(paramID);
+
+                SqlParameter paramDRev = new SqlParameter();//Revenue
+                paramDRev.ParameterName = "@dep_revenue";
+                paramDRev.Value = department.dep_revenue;
+                cmd.Parameters.Add(paramDRev);
+
+                SqlParameter paramDEXP = new SqlParameter(); //Expenditures
+                paramDEXP.ParameterName = "@dep_expenditure";
+                paramDEXP.Value = department.dep_expenditure;
+                cmd.Parameters.Add(paramDEXP);
+
+
+                conn.Open(); //Opens connection
+                cmd.ExecuteNonQuery(); //Add to table
+            }
+        }
+
+        [HttpPost]
+        public ActionResult editDept(Department department)
+        {
+
+            if (ModelState.IsValid)
+            {    
+                AdminController adminController = new AdminController();
+
+                adminController.SaveDepartment(department);
+
+                return RedirectToAction("Dept");
+            }
+            else
+            {
+                ViewBag.Message = "Invalid Input";
+                return View();
+            }
+        }
+
         public ActionResult Staff()
         {
             return View();
