@@ -43,8 +43,8 @@ namespace zoo.Controllers
 
             return View();
         }
-            [HttpPost]
-           public ActionResult Contact(Employee Model)
+        [HttpPost]
+        public ActionResult Contact(Employee Model)
         {
             using (team4zooEntities db = new team4zooEntities())
             {
@@ -57,8 +57,7 @@ namespace zoo.Controllers
                     ViewBag.Message = "No one by that name was found";
                 return View();
             }
-       }
-
+        }
         [HttpPost]
         public ActionResult Inventory(Inventory Model)
         {
