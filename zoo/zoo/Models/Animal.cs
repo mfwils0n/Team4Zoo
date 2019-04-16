@@ -37,7 +37,9 @@ namespace zoo.Models
         public string medication { get; set; }
         [Required]
         public string dose { get; set; }
+        [Required]
         public string vet { get; set; }
+        [Required]
         public string description { get; set; }
         public System.DateTime from { get; set; }
         public System.DateTime to { get; set; }
@@ -51,10 +53,11 @@ namespace zoo.Models
         public virtual ICollection<Animal_Medication_Care> Animal_Medication_Care { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<Food_Supply> Food_Supply { get; set; }
-
+       
         public override string ToString()
         {
             return this.animal_name;
         }
+
     }
 }
