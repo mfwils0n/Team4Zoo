@@ -39,14 +39,36 @@ namespace zoo.Controllers
                 }
                 else
                 {
-                    IEnumerable<Animal> MyAnimals = ViewMyAnimals();
-                    IEnumerable<Animal_Feed_Care> FeedReport = db.Animal_Feed_Care.Where(x => x.Animal_ID == model.Animal_ID && (x.date >= from || x.date <= to)).ToList();
-                    var tuple = new Tuple<IEnumerable<Animal_Feed_Care>>( FeedReport);
-                    return View(tuple);
+               //     IEnumerable<Animal> MyAnimals = ViewMyAnimals();
+                    IEnumerable<Animal_Feed_Care> FeedReport = db.Animal_Feed_Care.Where(x => x.Animal_ID == Animal_ID && (x.date >= from || x.date <= to)).ToList();
+                    var tuple = new Tuple<IEnumerable<Animal_Feed_Care>>(FeedReport);
+                    return View("~/Views/CareGiverReport/Report.cshtml",tuple);
                 }
 
             }
             
+        }
+
+        [HttpPost]
+        public ActionResult ViewMedicationReport(Animal model, DateTime from, DateTime to)
+        {
+            using (team4zooEntities db = new team4zooEntities())
+            {
+                System.Guid Animal_ID = db.Animals.Where(x => x.animal_name == model.animal_name).Select(y => y.Animal_ID).FirstOrDefault();
+                if (from == null || to == null)
+                {
+                    return RedirectToAction("Index", "CareGiverReport");
+                }
+                else
+                {
+                    //     IEnumerable<Animal> MyAnimals = ViewMyAnimals();
+                    IEnumerable<Animal_Medication_Care> MedicationReport = db.Animal_Medication_Care.Where(x => x.Animal_ID == Animal_ID && (x.date >= from || x.date <= to)).ToList();
+                    var tuple = new Tuple<IEnumerable<Animal_Medication_Care>>(MedicationReport);
+                    return View("~/Views/CareGiverReport/MedicationReport.cshtml", tuple);
+                }
+
+            }
+
         }
     }
 }

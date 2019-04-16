@@ -1,5 +1,5 @@
 ﻿@using zoo.Models
-@model Tuple < IEnumerable < Animal >, IEnumerable<Animal_Feed_Care>>
+@model Tuple< IEnumerable < Animal >>
 
 @{
     ViewBag.Title = "Index";
@@ -43,8 +43,42 @@
                 <tr><td></td><td></td><td></td><td></td></tr>
                 <tr><td><h3>Food Reports</h3></td><td></td><td></td><td></tr>
                 <tr>
+                    <th>My Animals</th>
                     <th>From</th>
+                    <th>To</th>
                     <th></th>
+                </tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr>
+                    <td>
+                        @Html.DropDownListFor(model => model.Item1.ElementAt(0).animal_name,
+                         new SelectList(Model.Item1),
+                         "Select Value")
+                    </td>
+
+                    <td>
+                        <input type="date" name="from" id="from">
+                    </td>
+
+                    <td>
+                        <input type="date" name="to" id="to">
+                    </td>
+
+                    <td>
+                        <input type="submit" value="submit" />
+                    </td>
+
+                </tr>
+            }
+
+            @using (Html.BeginForm("ViewMedicationReport", "CareGiverReport", FormMethod.Post))
+            {
+                
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td><h3>Medication Reports</h3></td><td></td><td></td><td></tr>
+                <tr>
+                    <th>My Animals</th>
+                    <th>From</th>
                     <th>To</th>
                     <th></th>
                 </tr>
@@ -71,6 +105,7 @@
                 </tr>
             }
         </table>
+      
     </div>
 </body>
 </html>
