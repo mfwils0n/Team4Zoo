@@ -97,11 +97,55 @@
                     </td>
                     <td>
                             @Html.ActionLink("Edit", "editDept", new { id=item.Department_ID }, new {@class="btn btn-primary"}) |
-                            @Html.ActionLink("Details", "Details", new { id=item.Department_ID }, new {@class="btn btn-primary"}) |
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DetailModal">Detail</button> |
+                            <div class="modal fade" id="DetailModal" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <table class="table">
+                                            <tr>
+                                                <th>
+                                                    @Html.Label("Department Revenue")
+                                                </th>
+                                                <th>
+                                                    @Html.Label("Supervisor")
+                                                </th>
+                                                <th>
+                                                    @Html.Label("Department Expenditure")
+                                                </th>
+                                                <th>
+                                                    @Html.Label("Number of Employees")
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                            <tr>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
 
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Delete</button> |
+                             <div class="modal fade" id="deleteModal" role="alertdialog">
+                            <div class="modal-dialog">
 
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Message</button>
-                        <div class="modal fade" id="myModal" role="dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Confirm Delete?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                         <button type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#msgModal">Message</button>
+                        <div class="modal fade" id="msgModal" role="dialog">
                             <div class="modal-dialog">
 
                                 <!-- Modal content-->
@@ -133,15 +177,25 @@
 
                             </div>
                         </div>
+
+
                     </td>
 
                 </tr>
 
             }
-
         </table>
         <button type="button" class="btn btn-primary" onclick="Redirect_addDept()">Add New</button>
     </div>
+
+    @if (ViewBag.Message != null)
+{
+        <script type="text/javascript">  
+            window.onload = function () {  
+                alert("@ViewBag.Message");  
+            };  
+        </script>  
+}
 
     <script>
         var coll = document.getElementsByClassName("collapsible");

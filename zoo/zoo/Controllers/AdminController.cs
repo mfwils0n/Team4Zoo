@@ -111,6 +111,8 @@ namespace zoo.Controllers
 
                 adminController.AddDepartment(department);
 
+                ViewBag.Message = "New Department Created";
+
                 return RedirectToAction("Dept");
             }
             else
@@ -175,11 +177,13 @@ namespace zoo.Controllers
         public ActionResult editDept(Department department)
         {
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && department.department_name.Length > 0 && department.dep_expenditure >= 0)
             {    
                 AdminController adminController = new AdminController();
 
                 adminController.SaveDepartment(department);
+
+                ViewBag.Message = "Edit Successful";
 
                 return RedirectToAction("Dept");
             }
@@ -189,6 +193,9 @@ namespace zoo.Controllers
                 return View();
             }
         }
+
+
+
 
         public ActionResult Staff()
         {
