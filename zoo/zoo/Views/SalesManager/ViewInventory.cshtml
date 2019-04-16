@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<zoo.Models.Inventory>
 
 @{
-    ViewBag.Title = "Inventory";
+    ViewBag.Title = "ViewInventory";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
     <html lang="en">
@@ -56,7 +56,7 @@
 <body>
     <button class="collapsible">Inventory</button>
     <div class="content">
-    <table class="table">
+        <table class="table">
             <tr>
                 <th>
                     @Html.Label("Item Name")
@@ -65,50 +65,49 @@
                     @Html.Label("Price")
                 </th>
                 <th>
-                    @Html.Label("Quantity Ordered")
+                    @Html.Label("Quantity")
                 </th>
 
                 <th></th>
             </tr>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.item_name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ordered_quantity)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Item_ID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Item_ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Item_ID })
-                    </td>
-                </tr>
-            }
+@foreach (var item in Model){
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.item_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ordered_quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Item_ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Item_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Item_ID })
+        </td>
+    </tr>
+}
 
-        </table>
+</table>
     </div>
 
 
-    <script>
+<script>
 var coll = document.getElementsByClassName("collapsible");
 var i;
 
 for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-    }
-  });
+    coll[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    });
 }
-    </script>
+</script>
 </body>

@@ -49,9 +49,9 @@ namespace zoo.Controllers
         {
             using (team4zooEntities db = new team4zooEntities())
             {
-                var Price = db.Inventories.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.price).FirstOrDefault();
-                var InStock = db.Inventories.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.ordered_quantity).FirstOrDefault();
-                var ItemName = db.Inventories.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.item_name).FirstOrDefault();
+                var Price = db.Inventory.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.price).FirstOrDefault();
+                var InStock = db.Inventory.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.ordered_quantity).FirstOrDefault();
+                var ItemName = db.Inventory.Where(x => x.item_name == Model.item_name || x.Item_ID == Model.Item_ID).Select(y => y.item_name).FirstOrDefault();
 
                 String ItemInfo = ItemName + " Price: " + Price + " " + ", " + " In Stock: " + InStock;
                 if (ItemName != null)
@@ -70,17 +70,16 @@ namespace zoo.Controllers
             return View(shoplist);
         }
 
-        [HttpPost]
-        public ActionResult ViewInventory(Inventory Model)
+        public ActionResult ViewInventory()
         {
-            using (team4zooEntities db = new team4zooEntities())
-            {
-                List<Inventory> inventorylist = db.Inventories.ToList();
-                return View(inventorylist);
-            }
+            team4zooEntities db = new team4zooEntities();
+            
+            List<Inventory> inventorylist = db.Inventory.ToList();
+            return View(inventorylist);
+        }
 
                 
            
-        }
+        
     }
 }
