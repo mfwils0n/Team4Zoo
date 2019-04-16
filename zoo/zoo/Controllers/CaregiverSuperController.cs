@@ -1,9 +1,10 @@
-﻿using zoo.Models;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using zoo.Models;
 
 namespace zoo.Controllers
 {
@@ -13,32 +14,49 @@ namespace zoo.Controllers
         // GET: CareGiverHome
         public ActionResult Index()
         {
-            //            IList<Animal> AnimalList = MyAnimals();
-            //            List<MyAnimal> Animals = new List<MyAnimal>();
-            //            foreach (var item in AnimalList)
-            //           {
-            //                Animals.Add(new MyAnimal(item.animal_name, GetFamilyName(item.family), GetExihibitN(item.Exhibit_ID), GetExihibitL(item.Exhibit_ID)));
-            //            }
-            //            return View(Animals);
-            return View();
+            IEnumerable<Employee> EmployeeList = ViewMyEmployees();
+            List<MyEmployee> Employees = new List<MyEmployee>();
+            foreach (var person in EmployeeList)
+            {
+                Employees.Add(new MyEmployee(person.f_name, person.l_name, person.email, person.phone_num));
+            }
+            return View(Employees);
         }
 
-        public IList<Employee> GetEmployees(Employee Manager)
+        public IEnumerable<Employee> ViewMyEmployees()
         {
             using (team4zooEntities db = new team4zooEntities())
             {
                 System.Guid MyEmployee_ID = (System.Guid)Session["Employee_ID"];
-                var result = new List<Employee>();
-
-                var employees = db.Employees.Where(e => e.Supervisor_ID == MyEmployee_ID).ToList();
-
-                foreach (var employee in employees)
-                {
-                    result.Add(employee);
-                    result.AddRange(GetEmployees(employee));
-                }
-                return result;
+                return db.Employees.ToList().Where(x => (x.Supervisor_ID == MyEmployee_ID));
             }
+        }
+
+        public String GetFamilyName(int? FamilyID)
+        {
+            using (team4zooEntities db = new team4zooEntities())
+            {
+                return db.Family_Name.Where(x => x.Family_ID == FamilyID).Select(y => y.family_title).FirstOrDefault();
+            }
+
+        }
+
+        public String GetExihibitN(System.Guid ID)
+        {
+            using (team4zooEntities db = new team4zooEntities())
+            {
+                return db.Exhibits.Where(x => x.Exhibit_ID == ID).Select(y => y.exhibit_name).FirstOrDefault();
+            }
+
+        }
+
+        public String GetExihibitL(System.Guid ID)
+        {
+            using (team4zooEntities db = new team4zooEntities())
+            {
+                return db.Exhibits.Where(x => x.Exhibit_ID == ID).Select(y => y.exhibit_loc).FirstOrDefault();
+            }
+
         }
     }
 }

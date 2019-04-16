@@ -101,6 +101,9 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -113,6 +116,12 @@
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -266,6 +275,7 @@
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserProfile.cs" />
+    <Compile Include="Models\MyEmployee.cs" />
     <Compile Include="Models\Zoo.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -378,24 +388,23 @@
     <Content Include="Views\Admin\Home.cshtml" />
     <Content Include="Views\CaregiverSuper\MyAnimals.cshtml" />
     <Content Include="Views\CaregiverSuper\MyAttractions.cshtml" />
-    <Content Include="Views\CaregiverSuper\MyEmployees.cshtml" />
+    <Content Include="Views\CaregiverSuper\Index.cshtml" />
     <Content Include="Views\Admin\Staff.cshtml" />
     <Content Include="Views\Admin\Dept.cshtml" />
     <Content Include="Views\FeedCare\Index.cshtml" />
     <Content Include="Views\CareGiverHome\Index.cshtml" />
     <Content Include="Views\CareGiverReport\Index.cshtml" />
-
     <Content Include="Views\SalesManager\Inventory.cshtml" />
     <Content Include="Views\SalesManager\Contact.cshtml" />
     <Content Include="Views\SalesManager\ViewInventory.cshtml" />
     <Content Include="Views\CareGiverReport\Report.cshtml" />
     <Content Include="Views\CareGiverReport\MedicationReport.cshtml" />
-
     <Content Include="Views\CareGiverReport\Report.cshtml" />
     <Content Include="Views\SalesManager\Inventory.cshtml" />
     <Content Include="Views\SalesManager\Contact.cshtml" />
     <Content Include="Views\SalesManager\ViewInventory.cshtml" />
     <Content Include="Views\SalesManager\Shop.cshtml" />
+    <Content Include="Views\SalesAssociate\TicketSales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
