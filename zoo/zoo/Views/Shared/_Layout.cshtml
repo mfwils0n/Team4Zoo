@@ -41,10 +41,10 @@
                         }
                         if (Session["RoleName"].ToString().Equals("SalesManager"))
                         {
-                            <li>@Html.ActionLink("Look Up Item", "Inventory", "SalesManager")</li>
+                            <li>@Html.ActionLink("Lookup Item", "Inventory", "SalesManager")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "SalesManager")</li>
                             <li>@Html.ActionLink("Shops", "Shop", "SalesManager")</li>
-                            <li>@Html.ActionLink("View All Inventory", "ViewInventory", "SalesManager")</li>
+                            <li>@Html.ActionLink("View Inventory", "ViewInventory", "SalesManager")</li>
                         }
                         if (Session["RoleName"].ToString().Equals("Admin"))
                         {
