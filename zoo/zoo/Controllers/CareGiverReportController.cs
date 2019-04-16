@@ -61,7 +61,6 @@ namespace zoo.Controllers
                 }
                 else
                 {
-                    //     IEnumerable<Animal> MyAnimals = ViewMyAnimals();
                     IEnumerable<Animal_Medication_Care> MedicationReport = db.Animal_Medication_Care.Where(x => x.Animal_ID == Animal_ID && (x.date >= from || x.date <= to)).ToList();
                     var tuple = new Tuple<IEnumerable<Animal_Medication_Care>>(MedicationReport);
                     return View("~/Views/CareGiverReport/MedicationReport.cshtml", tuple);

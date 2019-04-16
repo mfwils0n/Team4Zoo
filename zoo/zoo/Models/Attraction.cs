@@ -29,7 +29,7 @@ namespace zoo.Models
         public bool isActive { get; set; }
         public Nullable<System.Guid> Exhibit_ID { get; set; }
         public System.Guid Attraction_ID { get; set; }
-    
+        public string manager_name { get; set; }
         public virtual Exhibit Exhibit { get; set; }
         public virtual ICollection<BoxOffice_Records> BoxOffice_Records { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }

@@ -401,7 +401,6 @@
     <Content Include="Views\CareGiverReport\Report.cshtml" />
     <Content Include="Views\CareGiverReport\MedicationReport.cshtml" />
     <Content Include="Views\CareGiverReport\Report.cshtml" />
-    <Content Include="Views\SalesManager\Inventory.cshtml" />
     <Content Include="Views\SalesManager\Contact.cshtml" />
     <Content Include="Views\SalesManager\ViewInventory.cshtml" />
     <Content Include="Views\SalesManager\Shop.cshtml" />
@@ -411,11 +410,14 @@
     <Content Include="Views\Admin\Maintenance.cshtml" />
     <Content Include="Views\SalesAssociate\AddMember.cshtml" />
     <Content Include="Views\SalesManager\Index.cshtml" />
-    <Content Include="Views\Admin\Listtemplate.cshtml" />
+
+    <Content Include="Views\CareGiverBaseAttraction\Index.cshtml" />
+    <Content Include="Views\CareGiverBaseAttraction\CurrentAttr.cshtml" />
+    <Content Include="Views\CareGiverBaseAttraction\AttrHistory.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\CareGiverBaseAttraction\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
