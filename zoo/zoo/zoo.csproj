@@ -170,7 +170,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CareGiverHomeController.cs" />
+    <Compile Include="Controllers\CareGiverReportController.cs" />
     <Compile Include="Controllers\CaregiverSuperController.cs" />
+    <Compile Include="Controllers\FeedCareController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -241,6 +243,9 @@
     <Compile Include="Models\Maintenance.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MedicationInputModel.cs" />
+    <Compile Include="Models\MyAnimal.cs" />
+    <Compile Include="Models\quantityFedModel.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -259,6 +264,7 @@
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\Zoo.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -450,7 +456,6 @@
     <Content Include="Views\SalesAssociate\Contact.cshtml" />
     <Content Include="Views\SalesAssociate\Inventory.cshtml" />
     <Content Include="Views\SalesAssociate\Sales.cshtml" />
-    <Content Include="Views\CareGiverHome\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -469,6 +474,10 @@
     <Content Include="Views\CaregiverSuper\MyEmployees.cshtml" />
     <Content Include="Views\Admin\Staff.cshtml" />
     <Content Include="Views\Admin\Dept.cshtml" />
+    <Content Include="Views\FeedCare\Index.cshtml" />
+    <Content Include="Views\CareGiverHome\Index.cshtml" />
+    <Content Include="Views\CareGiverReport\Index.cshtml" />
+    <Content Include="Views\CareGiverReport\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,12 +19,18 @@ namespace zoo.Models
             this.Food_Purchases = new HashSet<Food_Purchases>();
             this.Animals = new HashSet<Animal>();
         }
-    
+
+        public decimal quantity_fed { get; set; }
         public string Food_type { get; set; }
         public System.DateTime last_ordered { get; set; }
         public Nullable<System.DateTime> resupply_date { get; set; }
     
         public virtual ICollection<Food_Purchases> Food_Purchases { get; set; }
         public virtual ICollection<Animal> Animals { get; set; }
+
+        public override string ToString()
+        {
+            return this.Food_type;
+        }
     }
 }

@@ -11,7 +11,8 @@ namespace zoo.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Animal
     {
         public Animal()
@@ -21,7 +22,7 @@ namespace zoo.Models
             this.Employees = new HashSet<Employee>();
             this.Food_Supply = new HashSet<Food_Supply>();
         }
-            
+
         public System.Guid Animal_ID { get; set; }
         public string animal_name { get; set; }
         public Nullable<int> family { get; set; }
@@ -32,28 +33,28 @@ namespace zoo.Models
         public System.Guid Exhibit_ID { get; set; }
         public Nullable<System.Guid> Attraction_ID { get; set; }
         public bool isActive { get; set; }
+        [Required]
+        public string medication { get; set; }
+        [Required]
+        public string dose { get; set; }
+        public string vet { get; set; }
+        public string description { get; set; }
+        public System.DateTime from { get; set; }
+        public System.DateTime to { get; set; }
         public Nullable<System.Guid> Assignee1_ID { get; set; }
         public Nullable<System.Guid> Assignee2_ID { get; set; }
         public Nullable<System.Guid> Assignee3_ID { get; set; }
-    
+
         public virtual ICollection<Animal_Feed_Care> Animal_Feed_Care { get; set; }
         public virtual Exhibit Exhibit { get; set; }
         public virtual Family_Name Family_Name { get; set; }
         public virtual ICollection<Animal_Medication_Care> Animal_Medication_Care { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<Food_Supply> Food_Supply { get; set; }
-    }
 
-    public struct MyAnimal
-    {
-        public string Name;
-        public string Family;
-        public string ExihibitionN;
-        public string ExihibitionL;
-
-        public MyAnimal(string name, string fam, string exn, string exl)
+        public override string ToString()
         {
-            Name = name; Family = fam; ExihibitionN = exn; ExihibitionL = exl;
+            return this.animal_name;
         }
     }
 }
