@@ -43,7 +43,7 @@
                         <td>
                             @Html.EditorFor(model => model.Item2.ElementAt(0).quantity_fed),
                         </td>
-
+                        <td>@Html.ValidationMessageFor(model => model.Item2.ElementAt(0).quantity_fed)</td>
                         <td>
                             <input type="Submit" value="Save Changes" />
                         </td>
@@ -74,19 +74,19 @@
                         <td>
                             @Html.EditorFor(model => model.Item1.ElementAt(0).medication)
                         </td>
-
+                        
                         <td>
                             @Html.EditorFor(model => model.Item1.ElementAt(0).dose)
                         </td>
-
+                        
                         <td>
                             @Html.EditorFor(model => model.Item1.ElementAt(0).vet)
                         </td>
-
+                        
                         <td>
                             @Html.EditorFor(model => model.Item1.ElementAt(0).description)
                         </td>
-
+                        
                         <td>
                             <input type="Submit" value="Save Changes" />
                         </td>

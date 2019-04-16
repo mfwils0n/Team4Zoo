@@ -75,13 +75,13 @@ namespace zoo.Controllers
                 return View();
             }
         }
-        [HttpPost]
-        public ActionResult Sales(Shop_Sale_Record Model, string itemName, string phoneNum)
+         [HttpPost]
+        public ActionResult Sales(Shop_Sale_Record Model, string ShopID, string itemName)
         {
             using (team4zooEntities db = new team4zooEntities())
             {
                 var name = itemName;
-                var number = phoneNum;
+                var number = "000-000-0000";
                 var ID = db.Inventory.Where(x => x.item_name == itemName).Select(y => y.Item_ID).FirstOrDefault();
                 var Member = db.Customers.Where(x => x.phone_number == number).Select(y => y.Customer_ID).FirstOrDefault();
                 var Price = db.Inventory.Where(x => x.Item_ID == ID).Select(y => y.price).FirstOrDefault();
@@ -90,6 +90,7 @@ namespace zoo.Controllers
                 var amountPurchased = Model.quantity;
                 var cost = Price * Model.quantity;
                 var amountLeft = InStock;
+                Guid SID = new Guid(ShopID);
                 if (Model.refund_flag == false)
                 {
                     amountLeft = InStock - Model.quantity;
@@ -99,6 +100,7 @@ namespace zoo.Controllers
                     amountLeft = InStock + Model.quantity;
                 }
                 Model.Item_ID = ID;
+                Model.Shop_ID = SID;
                 if (number == "")
                 { Guid id = new Guid("7117d230-9bb6-4c3b-8d38-2a9b9e8092b6");
                     Member = id;

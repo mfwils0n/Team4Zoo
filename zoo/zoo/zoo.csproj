@@ -178,6 +178,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CareGiverBaseAttractionController.cs" />
     <Compile Include="Controllers\CareGiverHomeController.cs" />
     <Compile Include="Controllers\CareGiverReportController.cs" />
     <Compile Include="Controllers\CaregiverSuperController.cs" />
@@ -401,7 +402,6 @@
     <Content Include="Views\CareGiverReport\Report.cshtml" />
     <Content Include="Views\CareGiverReport\MedicationReport.cshtml" />
     <Content Include="Views\CareGiverReport\Report.cshtml" />
-    <Content Include="Views\SalesManager\Inventory.cshtml" />
     <Content Include="Views\SalesManager\Contact.cshtml" />
     <Content Include="Views\SalesManager\ViewInventory.cshtml" />
     <Content Include="Views\SalesManager\Shop.cshtml" />
@@ -412,6 +412,12 @@
     <Content Include="Views\SalesAssociate\AddMember.cshtml" />
     <Content Include="Views\SalesManager\Index.cshtml" />
     <Content Include="Views\CaregiverSuper\AddAnim.cshtml" />
+    <Content Include="Views\SalesManager\Index.cshtml" />
+
+    <Content Include="Views\CareGiverBaseAttraction\Index.cshtml" />
+    <Content Include="Views\CareGiverBaseAttraction\CurrentAttr.cshtml" />
+    <Content Include="Views\CareGiverBaseAttraction\AttrHistory.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
