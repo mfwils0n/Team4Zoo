@@ -27,7 +27,7 @@ namespace zoo.Models
     
         public virtual ICollection<Food_Purchases> Food_Purchases { get; set; }
         public virtual ICollection<Animal> Animals { get; set; }
-
+        public string ErrorMessage { get; set; }
         public override string ToString()
         {
             return this.Food_type;

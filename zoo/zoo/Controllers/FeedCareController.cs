@@ -51,7 +51,13 @@ namespace zoo.Controllers
                 NewEntry.Employee_ID = (System.Guid)Session["Employee_ID"];
                 NewEntry.date = DateTime.Today;
                 NewEntry.time = DateTime.Now.Subtract(DateTime.Today);
-                 
+
+                 if(foodObj.quantity_fed.Equals(0.00))
+                {
+                    foodObj.ErrorMessage = "Zero is not allowed.";
+                    return RedirectToAction("Index", "FeedCare");
+                }
+
                 if (NewEntry.Animal_ID == null || NewEntry.food_type == null)
                 {
                     return RedirectToAction("Index", "FeedCare");
@@ -84,7 +90,7 @@ namespace zoo.Controllers
                     NewEntry.date = DateTime.Today;
                     NewEntry.time = DateTime.Now.Subtract(DateTime.Today);
                     NewEntry.vet = Model.vet;
-                    if (NewEntry.Animal_ID == null)
+                    if (NewEntry.Animal_ID == null || NewEntry.medication==null || NewEntry.dose ==null || NewEntry.vet == null || NewEntry.description == null)
                     {
                         return RedirectToAction("Index", "FeedCare");
                     }

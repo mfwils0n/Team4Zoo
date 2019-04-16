@@ -43,12 +43,13 @@
                         <td>
                             @Html.EditorFor(model => model.Item2.ElementAt(0).quantity_fed),
                         </td>
-                        <td>@Html.ValidationMessageFor(model => model.Item2.ElementAt(0).quantity_fed)</td>
+                        
                         <td>
                             <input type="Submit" value="Save Changes" />
                         </td>
 
                     </tr>
+                    
                 }
                 @using (Html.BeginForm("MedicationEntery", "FeedCare", FormMethod.Post))
                 {
