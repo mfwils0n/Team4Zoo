@@ -107,6 +107,7 @@
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -191,6 +192,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminReport.cs" />
     <Compile Include="Models\Animal.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -327,6 +329,8 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -413,11 +417,11 @@
     <Content Include="Views\SalesManager\Index.cshtml" />
     <Content Include="Views\CaregiverSuper\AddAnim.cshtml" />
     <Content Include="Views\SalesManager\Index.cshtml" />
-
     <Content Include="Views\CareGiverBaseAttraction\Index.cshtml" />
     <Content Include="Views\CareGiverBaseAttraction\CurrentAttr.cshtml" />
     <Content Include="Views\CareGiverBaseAttraction\AttrHistory.cshtml" />
-
+    <Content Include="Views\Admin\Report.cshtml" />
+    <Content Include="Views\Admin\Finance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

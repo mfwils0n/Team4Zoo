@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data;
 using System.Data.SqlClient;
+using Newtonsoft.Json;
 using zoo.Models;
 
 namespace zoo.Controllers
@@ -200,5 +201,67 @@ namespace zoo.Controllers
         {
             return View();
         }
+
+
+        [HttpGet]
+        public ActionResult Finance()
+        {
+
+            return View();
+        }
+       
+        public ContentResult RevExpChart()
+        {
+            using (team4zooEntities DB = new team4zooEntities())
+            {
+                //Chart View Data Model to store necessary data.
+                List<DeptChartViewModel> dept = new List<DeptChartViewModel>();
+
+                //Get Department List
+                var results = DB.Departments.ToList();
+
+                //Convert all necessary data to List.
+                foreach(Department department in results)
+                {
+                    DeptChartViewModel deptVM = new DeptChartViewModel();
+                    //Assign Values
+                    
+                    //Check if underscore
+                    if (department.department_name.Contains('_'))
+                    {
+                        string tmpname = department.department_name.Replace("_", " ");
+                        deptVM.name = tmpname;
+                    }
+                    else
+                    {
+                        deptVM.name = department.department_name;
+                    }
+
+                    deptVM.expenditure = department.dep_expenditure;
+                    deptVM.revenue = department.dep_revenue;
+
+                    //Add to Chart Data
+                    dept.Add(deptVM);
+                }
+
+                //Return serialised Json
+                return Content(JsonConvert.SerializeObject(dept), "application/json");
+            }
+        }
+        
+        [HttpGet]
+        public ActionResult Report()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Report(String item)
+        {
+            return View();
+        }
+
+
     }
 }
