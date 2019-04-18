@@ -177,6 +177,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AddAnimalController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CareGiverBaseAttractionController.cs" />
     <Compile Include="Controllers\CareGiverHomeController.cs" />
@@ -206,7 +207,7 @@
     <Compile Include="Models\BoxOffice_Records.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Class1.cs" />
+    <Compile Include="Models\AddAnimal.cs" />
     <Compile Include="Models\Credential.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -257,7 +258,6 @@
     </Compile>
     <Compile Include="Models\MedicationInputModel.cs" />
     <Compile Include="Models\MyAnimal.cs" />
-    <Compile Include="Models\quantityFedModel.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -413,11 +413,10 @@
     <Content Include="Views\SalesManager\Index.cshtml" />
     <Content Include="Views\CaregiverSuper\AddAnim.cshtml" />
     <Content Include="Views\SalesManager\Index.cshtml" />
-
     <Content Include="Views\CareGiverBaseAttraction\Index.cshtml" />
     <Content Include="Views\CareGiverBaseAttraction\CurrentAttr.cshtml" />
     <Content Include="Views\CareGiverBaseAttraction\AttrHistory.cshtml" />
-
+    <Content Include="Views\AddAnimal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
