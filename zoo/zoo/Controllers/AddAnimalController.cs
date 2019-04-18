@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -61,26 +62,45 @@ namespace zoo.Controllers
         {
             using (team4zooEntities db = new team4zooEntities())
             {
-                Animal animal = new Animal();
-                animal.Animal_ID = Guid.NewGuid();
-                animal.animal_name = model.name;
-                animal.dob = dob;
-                animal.sex = model.sex;
-                animal.weight = model.weight;
-                animal.owner = model.owner;
-                animal.isActive = true;
-                animal.family = db.Family_Name.Where(x => x.family_title == model.familyN).Select(y => y.Family_ID).FirstOrDefault();
-                if (model.AttrN != null) {
-                    animal.Attraction_ID = db.Attractions.Where(x => x.attraction_name == model.AttrN).Select(y => y.Attraction_ID).FirstOrDefault();
-                 }
-                animal.Exhibit_ID = db.Exhibits.Where(x => x.exhibit_name == model.ExhibitN).Select(y => y.Exhibit_ID).FirstOrDefault();
-                animal.Assignee1_ID = db.Employees.Where(x => x.username == model.Assignee1).Select(y => y.Employee_ID).FirstOrDefault();
-                animal.Assignee2_ID = db.Employees.Where(x => x.username == model.Assignee2).Select(y => y.Employee_ID).FirstOrDefault();
-                animal.Assignee3_ID = db.Employees.Where(x => x.username == model.Assginee3).Select(y => y.Employee_ID).FirstOrDefault();
+                try
+                {
+                    Animal animal = new Animal();
+                    animal.Animal_ID = Guid.NewGuid();
+                    animal.animal_name = model.name;
+                    animal.dob = dob;
+                    animal.sex = model.sex;
+                    animal.weight = model.weight;
+                    animal.owner = model.owner;
+                    animal.isActive = true;
+                    animal.family = db.Family_Name.Where(x => x.family_title == model.familyN).Select(y => y.Family_ID).FirstOrDefault();
+                    if (model.AttrN != null)
+                    {
+                        animal.Attraction_ID = db.Attractions.Where(x => x.attraction_name == model.AttrN).Select(y => y.Attraction_ID).FirstOrDefault();
+                    }
+                    animal.Exhibit_ID = db.Exhibits.Where(x => x.exhibit_name == model.ExhibitN).Select(y => y.Exhibit_ID).FirstOrDefault();
+                    animal.Assignee1_ID = db.Employees.Where(x => x.username == model.Assignee1).Select(y => y.Employee_ID).FirstOrDefault();
+                    animal.Assignee2_ID = db.Employees.Where(x => x.username == model.Assignee2).Select(y => y.Employee_ID).FirstOrDefault();
+                    animal.Assignee3_ID = db.Employees.Where(x => x.username == model.Assginee3).Select(y => y.Employee_ID).FirstOrDefault();
 
-                db.Animals.Add(animal);
-                db.SaveChanges();
-                return RedirectToAction("Index", "AddAnimal");
+                    db.Animals.Add(animal);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "AddAnimal");
+                }
+
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    throw;
+                }
             }
 
         }

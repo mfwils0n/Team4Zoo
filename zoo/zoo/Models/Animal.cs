@@ -33,13 +33,13 @@ namespace zoo.Models
         public System.Guid Exhibit_ID { get; set; }
         public Nullable<System.Guid> Attraction_ID { get; set; }
         public bool isActive { get; set; }
-        [Required]
+        
         public string medication { get; set; }
-        [Required]
+        
         public string dose { get; set; }
-        [Required]
+        
         public string vet { get; set; }
-        [Required]
+        
         public string description { get; set; }
         public System.DateTime from { get; set; }
         public System.DateTime to { get; set; }
