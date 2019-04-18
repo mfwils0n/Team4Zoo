@@ -90,7 +90,7 @@ namespace zoo.Controllers
                     NewEntry.date = DateTime.Today;
                     NewEntry.time = DateTime.Now.Subtract(DateTime.Today);
                     NewEntry.vet = Model.vet;
-                    if (NewEntry.Animal_ID == null || NewEntry.medication==null || NewEntry.dose ==null || NewEntry.vet == null || NewEntry.description == null)
+                    if (NewEntry.Animal_ID == null || NewEntry.medication==null || NewEntry.dose == null || NewEntry.vet == null || NewEntry.description == null)
                     {
                         return RedirectToAction("Index", "FeedCare");
                     }

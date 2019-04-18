@@ -34,7 +34,7 @@
                         }
                         if (Session["RoleName"].ToString().Equals("SalesAssociate"))
                         {
-                           <li>@Html.ActionLink("Ticket Sales", "TicketSales", "SalesAssociate")</li>
+                            <li>@Html.ActionLink("Ticket Sales", "TicketSales", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Shop Sales", "Sales", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Add Member", "AddMember", "SalesAssociate")</li>
                             <li>@Html.ActionLink("Inventory", "Inventory", "SalesAssociate")</li>
@@ -61,6 +61,7 @@
                         if (Session["RoleName"].ToString().Equals("CaregiverSuper"))
                         {
                             <li>@Html.ActionLink("My Animals", "MyAnimals", "CaregiverSuper")</li>
+                            <li>@Html.ActionLink("Add Animals", "Index", "AddAnimal")</li>
                             <li>@Html.ActionLink("My Employees", "Index", "CaregiverSuper")</li>
                             <li>@Html.ActionLink("My Attractions", "MyAttractions", "CaregiverSuper")</li>
                             <li>@Html.ActionLink("Add Attractions", "AddAttraction", "CaregiverSuperAttraction")</li>

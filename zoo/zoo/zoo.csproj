@@ -178,6 +178,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AddAnimalController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CareGiverBaseAttractionController.cs" />
     <Compile Include="Controllers\CareGiverHomeController.cs" />
@@ -208,7 +209,7 @@
     <Compile Include="Models\BoxOffice_Records.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Class1.cs" />
+    <Compile Include="Models\AddAnimal.cs" />
     <Compile Include="Models\Credential.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -259,7 +260,6 @@
     </Compile>
     <Compile Include="Models\MedicationInputModel.cs" />
     <Compile Include="Models\MyAnimal.cs" />
-    <Compile Include="Models\quantityFedModel.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -391,12 +391,10 @@
     <Content Include="Views\SalesAssociate\Contact.cshtml" />
     <Content Include="Views\SalesAssociate\Inventory.cshtml" />
     <Content Include="Views\SalesAssociate\Sales.cshtml" />
-    <Content Include="Views\Admin\Home.cshtml" />
+
     <Content Include="Views\CaregiverSuper\MyAnimals.cshtml" />
     <Content Include="Views\CaregiverSuper\MyAttractions.cshtml" />
     <Content Include="Views\CaregiverSuper\Index.cshtml" />
-    <Content Include="Views\Admin\Staff.cshtml" />
-    <Content Include="Views\Admin\Dept.cshtml" />
     <Content Include="Views\FeedCare\Index.cshtml" />
     <Content Include="Views\CareGiverHome\Index.cshtml" />
     <Content Include="Views\CareGiverReport\Index.cshtml" />
@@ -410,9 +408,7 @@
     <Content Include="Views\SalesManager\ViewInventory.cshtml" />
     <Content Include="Views\SalesManager\Shop.cshtml" />
     <Content Include="Views\SalesAssociate\TicketSales.cshtml" />
-    <Content Include="Views\Admin\addDept.cshtml" />
-    <Content Include="Views\Admin\editdept.cshtml" />
-    <Content Include="Views\Admin\Maintenance.cshtml" />
+
     <Content Include="Views\SalesAssociate\AddMember.cshtml" />
     <Content Include="Views\SalesManager\Index.cshtml" />
     <Content Include="Views\CaregiverSuper\AddAnim.cshtml" />
@@ -420,7 +416,15 @@
     <Content Include="Views\CareGiverBaseAttraction\Index.cshtml" />
     <Content Include="Views\CareGiverBaseAttraction\CurrentAttr.cshtml" />
     <Content Include="Views\CareGiverBaseAttraction\AttrHistory.cshtml" />
-    <Content Include="Views\Admin\Report.cshtml" />
+	<Content Include="Views\AddAnimal\Index.cshtml" />
+
+	<Content Include="Views\Admin\Home.cshtml" />
+	<Content Include="Views\Admin\Staff.cshtml" />
+    <Content Include="Views\Admin\Dept.cshtml" />
+	<Content Include="Views\Admin\addDept.cshtml" />
+    <Content Include="Views\Admin\editdept.cshtml" />
+    <Content Include="Views\Admin\Maintenance.cshtml" />
+	<Content Include="Views\Admin\Report.cshtml" />
     <Content Include="Views\Admin\Finance.cshtml" />
   </ItemGroup>
   <ItemGroup>
