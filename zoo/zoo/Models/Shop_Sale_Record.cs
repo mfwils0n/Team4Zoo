@@ -11,7 +11,8 @@ namespace zoo.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Shop_Sale_Record
     {
         public System.Guid Sale_ID { get; set; }
@@ -19,6 +20,7 @@ namespace zoo.Models
         public System.Guid Item_ID { get; set; }
         public int quantity { get; set; }
         public System.Guid Customer_ID { get; set; }
+        [DisplayName("Refund")]
         public bool refund_flag { get; set; }
         public System.DateTime date { get; set; }
     
