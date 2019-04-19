@@ -55,7 +55,7 @@
           <Property Name="dose" Type="varchar" MaxLength="20" />
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="time" Type="time" Precision="0" Nullable="false" />
-          <Property Name="vet" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="vet" Type="varchar" MaxLength="30" />
           <Property Name="description" Type="varchar" MaxLength="100" />
           <Property Name="Record_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Employee_ID" Type="uniqueidentifier" />
@@ -166,8 +166,8 @@ warning 6002: The table/view 'team4zoo.zoo.Employee_Animal_Junction_Table' does 
           <Key>
             <PropertyRef Name="Family_ID" />
           </Key>
-          <Property Name="family_title" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="Family_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Family_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="family_title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'team4zoo.zoo.Food_Animal_Junction_table' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -209,6 +209,7 @@ warning 6002: The table/view 'team4zoo.zoo.Food_Animal_Junction_table' does not 
           <Property Name="price" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="ordered_quantity" Type="int" Nullable="false" />
           <Property Name="Department_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="wholesaleprice" Type="decimal" Precision="5" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Jobs">
           <Key>
@@ -283,20 +284,6 @@ warning 6002: The table/view 'team4zoo.zoo.Food_Animal_Junction_table' does not 
           <Property Name="zoo_acres" Type="int" Nullable="false" />
           <Property Name="zoo_est_date" Type="date" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Animal_Care_Animal">
-          <End Role="Animal" Type="Self.Animal" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Animal_Feed_Care" Type="Self.Animal_Feed_Care" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Animal">
-              <PropertyRef Name="Animal_ID" />
-            </Principal>
-            <Dependent Role="Animal_Feed_Care">
-              <PropertyRef Name="Animal_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Animal_Exhibit_ID">
           <End Role="Exhibit" Type="Self.Exhibit" Multiplicity="1" />
           <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
@@ -309,7 +296,7 @@ warning 6002: The table/view 'team4zoo.zoo.Food_Animal_Junction_table' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Animal_Family_Name">
+        <Association Name="FK_Animal_Family">
           <End Role="Family_Name" Type="Self.Family_Name" Multiplicity="0..1" />
           <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
           <ReferentialConstraint>
@@ -322,9 +309,7 @@ warning 6002: The table/view 'team4zoo.zoo.Food_Animal_Junction_table' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Animal_Medication_Care_Animal">
-          <End Role="Animal" Type="Self.Animal" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
           <End Role="Animal_Medication_Care" Type="Self.Animal_Medication_Care" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Animal">
@@ -392,30 +377,6 @@ warning 6002: The table/view 'team4zoo.zoo.Food_Animal_Junction_table' does not 
             </Principal>
             <Dependent Role="BoxOffice_Records">
               <PropertyRef Name="Department_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BoxOffice_Records_Tickets">
-          <End Role="Tickets" Type="Self.Tickets" Multiplicity="0..1" />
-          <End Role="BoxOffice_Records" Type="Self.BoxOffice_Records" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tickets">
-              <PropertyRef Name="Ticket_type_ID" />
-            </Principal>
-            <Dependent Role="BoxOffice_Records">
-              <PropertyRef Name="Ticket_type_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Credentials_Employee">
-          <End Role="Credentials" Type="Self.Credentials" Multiplicity="0..1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Credentials">
-              <PropertyRef Name="username" />
-            </Principal>
-            <Dependent Role="Employee">
-              <PropertyRef Name="username" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -693,15 +654,11 @@ FROM [zoo].[Employee_Animal_Junction_Table] AS [Employee_Animal_Junction_Table]<
 [Food_Animal_Junction_table].[Animal_ID] AS [Animal_ID]
 FROM [zoo].[Food_Animal_Junction_table] AS [Food_Animal_Junction_table]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_Animal_Care_Animal" Association="Self.FK_Animal_Care_Animal">
-            <End Role="Animal" EntitySet="Animal" />
-            <End Role="Animal_Feed_Care" EntitySet="Animal_Feed_Care" />
-          </AssociationSet>
           <AssociationSet Name="FK_Animal_Exhibit_ID" Association="Self.FK_Animal_Exhibit_ID">
             <End Role="Exhibit" EntitySet="Exhibit" />
             <End Role="Animal" EntitySet="Animal" />
           </AssociationSet>
-          <AssociationSet Name="FK_Animal_Family_Name" Association="Self.FK_Animal_Family_Name">
+          <AssociationSet Name="FK_Animal_Family" Association="Self.FK_Animal_Family">
             <End Role="Family_Name" EntitySet="Family_Name" />
             <End Role="Animal" EntitySet="Animal" />
           </AssociationSet>
@@ -728,14 +685,6 @@ FROM [zoo].[Food_Animal_Junction_table] AS [Food_Animal_Junction_table]</Definin
           <AssociationSet Name="FK_BoxOffice_Records_Department" Association="Self.FK_BoxOffice_Records_Department">
             <End Role="Department" EntitySet="Department" />
             <End Role="BoxOffice_Records" EntitySet="BoxOffice_Records" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BoxOffice_Records_Tickets" Association="Self.FK_BoxOffice_Records_Tickets">
-            <End Role="Tickets" EntitySet="Tickets" />
-            <End Role="BoxOffice_Records" EntitySet="BoxOffice_Records" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Credentials_Employee" Association="Self.FK_Credentials_Employee">
-            <End Role="Credentials" EntitySet="Credentials" />
-            <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
           <AssociationSet Name="FK_Department_Supervisor_ID" Association="Self.FK_Department_Supervisor_ID">
             <End Role="Employee" EntitySet="Employee" />
@@ -865,7 +814,7 @@ FROM [zoo].[Food_Animal_Junction_table] AS [Food_Animal_Junction_table]</Definin
           <Property Name="dose" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="time" Type="Time" Nullable="false" Precision="0" />
-          <Property Name="vet" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vet" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Record_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Employee_ID" Type="Guid" />
@@ -1000,7 +949,7 @@ FROM [zoo].[Food_Animal_Junction_table] AS [Food_Animal_Junction_table]</Definin
           <Key>
             <PropertyRef Name="Family_ID" />
           </Key>
-          <Property Name="family_title" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="family_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Family_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Animals" Relationship="Self.FK_Animal_Family_Name" FromRole="Family_Name" ToRole="Animal" />
         </EntityType>
@@ -1039,6 +988,7 @@ FROM [zoo].[Food_Animal_Junction_table] AS [Food_Animal_Junction_table]</Definin
           <Property Name="ordered_quantity" Type="Int32" Nullable="false" />
           <Property Name="Department_ID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Shop_Sale_Record" Relationship="Self.FK_Shop_Sale_Record_Inventory" FromRole="Inventory" ToRole="Shop_Sale_Record" />
+          <Property Name="wholesaleprice" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
@@ -1798,6 +1748,7 @@ FROM [zoo].[Food_Animal_Junction_table] AS [Food_Animal_Junction_table]</Definin
           <EntitySetMapping Name="Inventories">
             <EntityTypeMapping TypeName="team4zooModel.Inventory">
               <MappingFragment StoreEntitySet="Inventory">
+                <ScalarProperty Name="wholesaleprice" ColumnName="wholesaleprice" />
                 <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
                 <ScalarProperty Name="item_name" ColumnName="item_name" />
                 <ScalarProperty Name="last_ordered" ColumnName="last_ordered" />
