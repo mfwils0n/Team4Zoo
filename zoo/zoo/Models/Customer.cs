@@ -11,7 +11,8 @@ namespace zoo.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Customer
     {
         public Customer()
@@ -19,10 +20,12 @@ namespace zoo.Models
             this.BoxOffice_Records = new HashSet<BoxOffice_Records>();
             this.Shop_Sale_Record = new HashSet<Shop_Sale_Record>();
         }
-    
+        [DisplayName("First Name")]
         public string f_name { get; set; }
         public string mid_init { get; set; }
+        [DisplayName("Last Name")]
         public string l_name { get; set; }
+        [DisplayName("Phone Number")]
         public string phone_number { get; set; }
         public bool membership { get; set; }
         public System.Guid Customer_ID { get; set; }
