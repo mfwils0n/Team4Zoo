@@ -83,6 +83,7 @@ namespace zoo.Controllers
                 var name = itemName;
                 var number = "000-000-0000";
                 var ID = db.Inventory.Where(x => x.item_name == itemName).Select(y => y.Item_ID).FirstOrDefault();
+                var check = db.Inventory.Where(x => x.Item_ID == ID).Select(y => y.Department_ID).FirstOrDefault();
                 var Member = db.Customers.Where(x => x.phone_number == number).Select(y => y.Customer_ID).FirstOrDefault();
                 var Price = db.Inventory.Where(x => x.Item_ID == ID).Select(y => y.price).FirstOrDefault();
                 var InStock = db.Inventory.Where(x => x.Item_ID == ID).Select(y => y.ordered_quantity).FirstOrDefault();
@@ -90,7 +91,18 @@ namespace zoo.Controllers
                 var amountPurchased = Model.quantity;
                 var cost = Price * Model.quantity;
                 var amountLeft = InStock;
+                Guid dept = new Guid("7203f98e-e4dc-4edd-b221-98b5855fd4e3");
                 Guid SID = new Guid(ShopID);
+                if(check == dept)
+                {
+                    ViewBag.Message = "Transaction Failed: Shops Cannot Sell Tickets";
+                    return View();
+                }
+                if(ItemName == null)
+                {
+                    ViewBag.Message = "No Item Found";
+                    return View();
+                }
                 if (Model.refund_flag == false)
                 {
                     amountLeft = InStock - Model.quantity;
@@ -137,6 +149,7 @@ namespace zoo.Controllers
                 var name = itemName;
                 var number = phoneNum;
                 var ID = db.Inventory.Where(x => x.item_name == itemName).Select(y => y.Item_ID).FirstOrDefault();
+                var check = db.Inventory.Where(x => x.Item_ID == ID).Select(y => y.Department_ID).FirstOrDefault();
                 var Member = db.Customers.Where(x => x.phone_number == number).Select(y => y.Customer_ID).FirstOrDefault();
                 var InStock = db.Inventory.Where(x => x.Item_ID == ID).Select(y => y.ordered_quantity).FirstOrDefault();
                 var Price = db.Inventory.Where(x => x.Item_ID == ID).Select(y => y.price).FirstOrDefault();
@@ -147,6 +160,11 @@ namespace zoo.Controllers
                 Guid NM = new Guid("00000000-0000-0000-0000-000000000000");
                 var nonMember = NM;
                 Guid dept = new Guid("7203f98e-e4dc-4edd-b221-98b5855fd4e3");
+                if(check != dept)
+                {
+                    ViewBag.Message = "Transaction Failed: Not a Ticket";
+                    return View();
+                }
                 if ( Member != nonMember)
                 {
                     discount = cost / 10;
