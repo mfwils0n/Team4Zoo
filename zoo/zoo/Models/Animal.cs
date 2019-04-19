@@ -26,7 +26,7 @@ namespace zoo.Models
         public System.Guid Animal_ID { get; set; }
         public string animal_name { get; set; }
         public Nullable<int> family { get; set; }
-        public System.DateTime dob { get; set; }
+        public System.DateTime? dob { get; set; }
         public string sex { get; set; }
         public decimal weight { get; set; }
         public string owner { get; set; }

@@ -1,5 +1,5 @@
 ﻿@using zoo.Models
-@model Tuple< IEnumerable < Animal >>
+@model Tuple< IEnumerable < Animal >, IEnumerable<string>>
 
 @{
     ViewBag.Title = "Index";
@@ -32,7 +32,12 @@
             background-color: #4CAF50;
             color: white;
         }
-    </style>>
+
+
+        .field-validation-error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div>
@@ -105,7 +110,9 @@
                 </tr>
             }
         </table>
-      
+        <div>
+            <label class="field-validation-error">@Html.DisplayFor(model => model.Item2)</label>
+        </div>
     </div>
 </body>
 </html>

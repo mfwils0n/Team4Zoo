@@ -28,11 +28,13 @@
 <body>
     <div class="container">
         <table class="table">
+            <tr><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td></tr>
             <tr><td><h3>Current User</h3></td><td><h3>Role</h3></td><td></td><td></td></tr>
             <tr><td>@Session["FName"].ToString().ToUpper() @Session["LName"].ToString().ToUpper()</td><td>@Session["RoleName"].ToString().ToUpper()</td><td></td></tr>
         </table>
         <table class="table">
-            <tr><td><h3>User Name:</h3></td><td></td><td></td><td></td></tr>
+             <tr><td><h3>User Name:</h3></td><td></td><td></td><td></td></tr>
             <tr><td><h5>@Session["username"].ToString()</h5><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#editUN">Edit</button></td></tr>
             <tr>
                 <td>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -24,5 +25,8 @@ namespace zoo.Models
         public IEnumerable<string> exhibitNames { get; set; }
         public IEnumerable<string> attrNames { get; set; }
         public IEnumerable<Char> sexs { get; set; }
+        
+        public string ErrorMessage1 { get; set; }
+        public string ErrorMessage2 { get; set; }
     }
 }

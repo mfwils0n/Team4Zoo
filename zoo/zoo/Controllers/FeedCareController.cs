@@ -16,8 +16,9 @@ namespace zoo.Controllers
         {
             IEnumerable<Animal> MyAnimals = ViewMyAnimals();
             IEnumerable<Food_Supply> Food = GetFoodTypes();
-          //  MedicationInputModel MedicationModel 
-            var tuple = new Tuple<IEnumerable<Animal>, IEnumerable<Food_Supply>>(MyAnimals, Food);
+            List<string> ErrorMsg = new List<string>();
+            ErrorMsg.Add(" ");
+            var tuple = new Tuple<IEnumerable<Animal>, IEnumerable<Food_Supply>,IEnumerable<string>>(MyAnimals, Food, ErrorMsg);
             return View(tuple);
         }
 
@@ -52,15 +53,15 @@ namespace zoo.Controllers
                 NewEntry.date = DateTime.Today;
                 NewEntry.time = DateTime.Now.Subtract(DateTime.Today);
 
-                 if(foodObj.quantity_fed.Equals(0.00))
+               
+                if (animalObj.animal_name == null || foodObj.Food_type == null || foodObj.quantity_fed.Equals(0.00) )
                 {
-                    foodObj.ErrorMessage = "Zero is not allowed.";
-                    return RedirectToAction("Index", "FeedCare");
-                }
-
-                if (NewEntry.Animal_ID == null || NewEntry.food_type == null)
-                {
-                    return RedirectToAction("Index", "FeedCare");
+                    IEnumerable<Animal> MyAnimals = ViewMyAnimals();
+                    IEnumerable<Food_Supply> Food = GetFoodTypes();
+                    List<string> ErrorMsg = new List<string>();
+                    ErrorMsg.Add("Fill All the Fields!");
+                    var tuple = new Tuple<IEnumerable<Animal>, IEnumerable<Food_Supply>, IEnumerable<string>>(MyAnimals, Food, ErrorMsg);
+                    return View("~/Views/FeedCare/Index.cshtml", tuple);
                 }
                 else
                 {
@@ -90,9 +91,14 @@ namespace zoo.Controllers
                     NewEntry.date = DateTime.Today;
                     NewEntry.time = DateTime.Now.Subtract(DateTime.Today);
                     NewEntry.vet = Model.vet;
-                    if (NewEntry.Animal_ID == null || NewEntry.medication==null || NewEntry.dose == null || NewEntry.vet == null || NewEntry.description == null)
+                    if (Model.animal_name == null || Model.medication==null || Model.dose == null || Model.vet == null || Model.description == null)
                     {
-                        return RedirectToAction("Index", "FeedCare");
+                        IEnumerable<Animal> MyAnimals = ViewMyAnimals();
+                        IEnumerable<Food_Supply> Food = GetFoodTypes();
+                        List<string> ErrorMsg = new List<string>();
+                        ErrorMsg.Add("Fill All the Fields!");
+                        var tuple = new Tuple<IEnumerable<Animal>, IEnumerable<Food_Supply>, IEnumerable<string>>(MyAnimals, Food, ErrorMsg);
+                        return View("~/Views/FeedCare/Index.cshtml", tuple);
                     }
                     else
                     {

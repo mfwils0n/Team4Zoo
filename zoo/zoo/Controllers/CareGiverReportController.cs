@@ -12,11 +12,13 @@ namespace zoo.Controllers
         // GET: CareGiverReport
         public ActionResult Index ()
         {
+            List<string> ErrorMsg = new List<string>();
+            ErrorMsg.Add(" ");
             IEnumerable<Animal> MyAnimals = ViewMyAnimals();
-            var tuple = new Tuple<IEnumerable<Animal>>(MyAnimals);
+            var tuple = new Tuple<IEnumerable<Animal>,IEnumerable<string> >(MyAnimals, ErrorMsg);
             return View(tuple);
         }
-
+     
         public IEnumerable<Animal> ViewMyAnimals()
         {
             using (team4zooEntities db = new team4zooEntities())
@@ -28,14 +30,18 @@ namespace zoo.Controllers
 
       
         [HttpPost]
-        public ActionResult ViewFoodReport(Animal model, DateTime from, DateTime to)
+        public ActionResult ViewFoodReport(Animal model, DateTime? from, DateTime? to)
         {
             using (team4zooEntities db = new team4zooEntities())
             {
                System.Guid Animal_ID = db.Animals.Where(x => x.animal_name == model.animal_name).Select(y => y.Animal_ID).FirstOrDefault();
-               if(from == null || to == null)
+               if(!from.HasValue || !to.HasValue || model.animal_name == null)
                 {
-                    return RedirectToAction("Index", "CareGiverReport");
+                    List<string> ErrorMsg = new List<string>();
+                    ErrorMsg.Add("Fill All the Fields!");
+                    IEnumerable<Animal> MyAnimals = ViewMyAnimals();
+                    var tuple = new Tuple<IEnumerable<Animal>, IEnumerable<string>>(MyAnimals, ErrorMsg);
+                    return View("~/Views/CareGiverReport/Index.cshtml", tuple);
                 }
                 else
                 {
@@ -50,14 +56,18 @@ namespace zoo.Controllers
         }
 
         [HttpPost]
-        public ActionResult ViewMedicationReport(Animal model, DateTime from, DateTime to)
+        public ActionResult ViewMedicationReport(Animal model, DateTime? from, DateTime? to)
         {
             using (team4zooEntities db = new team4zooEntities())
             {
                 System.Guid Animal_ID = db.Animals.Where(x => x.animal_name == model.animal_name).Select(y => y.Animal_ID).FirstOrDefault();
-                if (from == null || to == null)
+                if (!from.HasValue || !to.HasValue || model.animal_name == null)
                 {
-                    return RedirectToAction("Index", "CareGiverReport");
+                    List<string> ErrorMsg = new List<string>();
+                    ErrorMsg.Add("Fill All the Fields!");
+                    IEnumerable<Animal> MyAnimals = ViewMyAnimals();
+                    var tuple = new Tuple<IEnumerable<Animal>, IEnumerable<string>>(MyAnimals, ErrorMsg);
+                    return View("~/Views/CareGiverReport/Index.cshtml", tuple);
                 }
                 else
                 {

@@ -10,10 +10,14 @@ namespace zoo.Controllers
     public class CareGiverBaseAttractionController : Controller
     {
         // GET: CareGiverBaseAttraction
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Index()
         {
+            List<string> ErrorMsg = new List<string>();
+            ErrorMsg.Add(" ");
             IEnumerable<Animal> MyAnimals = ViewMyAnimals();
-            var tuple = new Tuple<IEnumerable<Animal>>(MyAnimals);
+            var tuple = new Tuple<IEnumerable<Animal>,IEnumerable<string>>(MyAnimals, ErrorMsg);
             return View(tuple);
         }
 
@@ -31,16 +35,34 @@ namespace zoo.Controllers
         {
             using (team4zooEntities db = new team4zooEntities())
             {
-                System.Guid AttrID = (System.Guid)db.Animals.Where(x => x.animal_name == model.animal_name).Select(y => y.Attraction_ID).FirstOrDefault();
-                if (AttrID == null)
+                
+                
+                if (model.animal_name == null)
                 {
-                    return RedirectToAction("Index", "CareGiverBaseAttraction");
+                    List<string> ErrorMsg = new List<string>();
+                    ErrorMsg.Add("Choose an Animal!");
+                    IEnumerable<Animal> MyAnimals = ViewMyAnimals();
+                    var tuple = new Tuple<IEnumerable<Animal>, IEnumerable<string>>(MyAnimals, ErrorMsg);
+                    return View("~/Views/CareGiverBaseAttraction/Index.cshtml", tuple);
                 }
                 else
                 {
-                    IEnumerable<Attraction> AttrReport = getNames(db.Attractions.Where(x => x.Attraction_ID == AttrID && x.isActive == true).ToList());
-                    var tuple = new Tuple<IEnumerable<Attraction>>(AttrReport);
-                    return View("~/Views/CareGiverBaseAttraction/CurrentAttr.cshtml", tuple);
+                    if (db.Animals.Where(x => x.animal_name == model.animal_name).Select(y => y.Attraction_ID).FirstOrDefault() == null)
+                    {
+                        List<string> ErrorMsg = new List<string>();
+                        ErrorMsg.Add("This Animal is not in any attractions!");
+                        IEnumerable<Animal> MyAnimals = ViewMyAnimals();
+                        var tuple = new Tuple<IEnumerable<Animal>, IEnumerable<string>>(MyAnimals, ErrorMsg);
+                        return View("~/Views/CareGiverBaseAttraction/Index.cshtml", tuple);
+                    }
+                    else
+                    {
+                        System.Guid AttrID = (System.Guid)db.Animals.Where(x => x.animal_name == model.animal_name).Select(y => y.Attraction_ID).FirstOrDefault();
+                        IEnumerable<Attraction> AttrReport = getNames(db.Attractions.Where(x => x.Attraction_ID == AttrID && x.isActive == true).ToList());
+                        var tuple = new Tuple<IEnumerable<Attraction>>(AttrReport);
+                        RedirectToAction("Index", "CareGiverBaseAttraction");
+                        return View("~/Views/CareGiverBaseAttraction/CurrentAttr.cshtml", tuple);
+                    }
                 }
 
             }
@@ -50,19 +72,33 @@ namespace zoo.Controllers
         public ActionResult AnimalAttrHistory(Animal model)
         {
             using (team4zooEntities db = new team4zooEntities())
-            {
-                System.Guid AttrID = (System.Guid)db.Animals.Where(x => x.animal_name == model.animal_name).Select(y => y.Attraction_ID).FirstOrDefault();
-                if (AttrID == null)
+            {                                
+                if (model.animal_name == null)
                 {
-                    return RedirectToAction("Index", "CareGiverReport");
+                    List<string> ErrorMsg = new List<string>();
+                    ErrorMsg.Add("Choose an Animal!");
+                    IEnumerable<Animal> MyAnimals = ViewMyAnimals();
+                    var tuple = new Tuple<IEnumerable<Animal>, IEnumerable<string>>(MyAnimals, ErrorMsg);
+                    return View("~/Views/CareGiverBaseAttraction/Index.cshtml", tuple);
                 }
                 else
                 {
-                    IEnumerable<Attraction> AttrReport = getNames(db.Attractions.Where(x => x.Attraction_ID == AttrID).ToList());
-
-                    var tuple = new Tuple<IEnumerable<Attraction>>(AttrReport);
-
-                    return View("~/Views/CareGiverBaseAttraction/AttrHistory.cshtml", tuple);
+                    if (db.Animals.Where(x => x.animal_name == model.animal_name).Select(y => y.Attraction_ID).FirstOrDefault() == null)
+                    {
+                        List<string> ErrorMsg = new List<string>();
+                        ErrorMsg.Add("This Animal is not in any attractions!");
+                        IEnumerable<Animal> MyAnimals = ViewMyAnimals();
+                        var tuple = new Tuple<IEnumerable<Animal>, IEnumerable<string>>(MyAnimals, ErrorMsg);
+                        return View("~/Views/CareGiverBaseAttraction/Index.cshtml", tuple);
+                    }
+                    else
+                    {
+                        System.Guid AttrID = (System.Guid)db.Animals.Where(x => x.animal_name == model.animal_name).Select(y => y.Attraction_ID).FirstOrDefault();
+                        IEnumerable<Attraction> AttrReport = getNames(db.Attractions.Where(x => x.Attraction_ID == AttrID).ToList());
+                        var tuple = new Tuple<IEnumerable<Attraction>>(AttrReport);
+                        RedirectToAction("Index", "CareGiverBaseAttraction");
+                        return View("~/Views/CareGiverBaseAttraction/AttrHistory.cshtml", tuple);
+                    }
                 }
 
             }

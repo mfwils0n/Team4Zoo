@@ -56,7 +56,11 @@
                 position: relative;
                 top: 1px;
             }
-    </style>>
+
+        .field-validation-error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     @using (Html.BeginForm("AddAnimal", "AddAnimal", FormMethod.Post))
@@ -159,9 +163,12 @@
         <div>
             <p>    </p>
             <p>    </p>
+            <label class="field-validation-error">@Html.DisplayFor(model => model.ErrorMessage1)</label>
+            <label class="field-validation-error">@Html.DisplayFor(model => model.ErrorMessage2)</label>
+            <p>    </p>
             <p>    </p>
         </div>
-        <div style="width:300px; margin:0 auto;">
+        <div style="width:300px; margin-top: 100px; margin:0 auto;">
 
             <input type="Submit" class="myButton" value="Save Changes" />
 
