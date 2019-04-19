@@ -11,7 +11,8 @@ namespace zoo.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel;
+    
 
 
     public partial class Employee
@@ -22,9 +23,10 @@ namespace zoo.Models
             this.Maintenances = new HashSet<Maintenance>();
             this.Animals = new HashSet<Animal>();
         }
-    
+        [DisplayName("First Name")]
         public string f_name { get; set; }
         public string mid_init { get; set; }
+        [DisplayName("Last Name")]
         public string l_name { get; set; }
         public string email { get; set; }
         public string sex { get; set; }
