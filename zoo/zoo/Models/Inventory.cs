@@ -11,7 +11,8 @@ namespace zoo.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Inventory
     {
         public Inventory()
@@ -20,10 +21,12 @@ namespace zoo.Models
         }
     
         public System.Guid Item_ID { get; set; }
+        [DisplayName("Item Name")]
         public string item_name { get; set; }
         public System.DateTime last_ordered { get; set; }
         public Nullable<System.DateTime> resupply_date { get; set; }
         public decimal price { get; set; }
+        [DisplayName("Quantity")]
         public int ordered_quantity { get; set; }
         public System.Guid Department_ID { get; set; }
     
