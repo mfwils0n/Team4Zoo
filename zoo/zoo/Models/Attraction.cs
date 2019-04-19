@@ -11,7 +11,8 @@ namespace zoo.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Attraction
     {
         public Attraction()
@@ -19,7 +20,7 @@ namespace zoo.Models
             this.BoxOffice_Records = new HashSet<BoxOffice_Records>();
             this.Employees = new HashSet<Employee>();
         }
-    
+        [DisplayName("Attraction Name")]
         public string attraction_name { get; set; }
         public System.Guid manager_ID { get; set; }
         public System.DateTime start_date { get; set; }
