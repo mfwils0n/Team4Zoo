@@ -61,7 +61,7 @@
     <p class="pad"></p>
 
     <div class="btn-group-vertical">
-        <button type="button" class="btn btn-primary">Add Employee</button>
+        <button type="button" class="btn btn-primary" onclick="Redirect_addEmp()">Add New Employee</button>
         <button type="button" class="btn btn-primary">Employee Lookup</button>
         <button type="button" class="btn btn-primary">Edit Employee</button>
         <button type="button" class="btn btn-primary">Delete Employee</button>
@@ -87,6 +87,11 @@
                     content.style.maxHeight = content.scrollHeight + "px";
                 }
             });
+        }
+
+
+        function Redirect_addEmp() {
+            location.href = "addEmp";
         }
     </script>
 </body>

@@ -81,18 +81,6 @@ namespace zoo.Controllers
         [HttpPost]
         public ActionResult AddDept(FormCollection formCollection)
         {
-            /*USE FOLLOWING CODE FOR TESTING KEYS
-            if (ModelState.IsValid)
-            {
-                foreach (string key in formCollection.AllKeys)
-                {
-                    Response.Write("Key = " + key + "  ");
-                    Response.Write("Value = " + formCollection[key]);
-                    Response.Write("<br/>");
-                }
-            }
-            */
-
             if (ModelState.IsValid && formCollection["department_name"].Length > 0 && formCollection["dep_revenue"].Length > 0 && formCollection["dep_expenditure"].Length > 0)
             {
                 //Get Data From Form
@@ -189,13 +177,348 @@ namespace zoo.Controllers
             }
         }
 
+        //This creates a SQL ready Employee object and adds to database
+        public void AddEmployee(Employee employee)
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = "Server=den1.mssql8.gear.host;Database=team4zoo;Uid=team4zoo;Pwd=Ji627i1J-x5?"; //Connection String with login info.
 
+                //Call Query
+                SqlCommand cmd = new SqlCommand("AddEmployee", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //Set Parameters
+                SqlParameter paramFName = new SqlParameter();//FirstName
+                paramFName.ParameterName = "@f_name";
+                paramFName.Value = employee.f_name;
+                cmd.Parameters.Add(paramFName);
+
+
+                SqlParameter parammidName = new SqlParameter(); //Middle Init
+                parammidName.ParameterName = "@mid_init";
+                if(employee.mid_init != null)
+                {
+                    parammidName.Value = employee.mid_init;
+                }
+                else
+                {
+                    parammidName.Value = DBNull.Value;
+                }
+                cmd.Parameters.Add(parammidName);
+
+                SqlParameter paramLName = new SqlParameter();//Last Name
+                paramLName.ParameterName = "@l_name";
+                paramLName.Value = employee.l_name;
+                cmd.Parameters.Add(paramLName);
+
+                SqlParameter paramEmail = new SqlParameter();//Email
+                paramEmail.ParameterName = "@email";
+                paramEmail.Value = employee.email;
+                cmd.Parameters.Add(paramEmail);
+
+                SqlParameter paramSex = new SqlParameter();//Sex
+                paramSex.ParameterName = "@sex";
+                paramSex.Value = employee.sex;
+                cmd.Parameters.Add(paramSex);
+
+                SqlParameter paramDOB = new SqlParameter();//DOB
+                paramDOB.ParameterName = "@dob";
+                paramDOB.Value = employee.dob;
+                cmd.Parameters.Add(paramDOB);
+
+                SqlParameter paramSSN = new SqlParameter();//SSN
+                paramSSN.ParameterName = "@ssn";
+                paramSSN.Value = employee.ssn;
+                cmd.Parameters.Add(paramSSN);
+
+                SqlParameter paramHourW = new SqlParameter(); //Hourly Wage
+                paramHourW.ParameterName = "@hourly_wage";
+                paramHourW.Value = employee.hourly_wage;
+                cmd.Parameters.Add(paramHourW);
+
+                SqlParameter paramHireD = new SqlParameter();//Hire DAte
+                paramHireD.ParameterName = "@hire_date";
+                paramHireD.Value = employee.hire_date;
+                cmd.Parameters.Add(paramHireD);
+
+                SqlParameter paramPhone = new SqlParameter();//Phone
+                paramPhone.ParameterName = "@phone_num";
+                paramPhone.Value = employee.phone_num;
+                cmd.Parameters.Add(paramPhone);
+
+                SqlParameter paramRole = new SqlParameter();//RoleID
+                paramRole.ParameterName = "@Role_ID";
+                if(employee.Role_ID != null)
+                {
+                    paramRole.Value = employee.Role_ID;
+                }
+                else
+                {
+                    paramRole.Value = DBNull.Value;
+                }
+
+                cmd.Parameters.Add(paramRole);
+
+                SqlParameter paramDept = new SqlParameter(); //Department
+                paramDept.ParameterName = "@Department_ID";
+                if (employee.Department_ID != null)
+                {
+                    paramDept.Value = employee.Department_ID;
+                }
+                else
+                {
+                    paramDept.Value = DBNull.Value;
+                }
+                cmd.Parameters.Add(paramDept);
+
+                SqlParameter paramActive = new SqlParameter();//isActive
+                paramActive.ParameterName = "@isActive";
+                paramActive.Value = employee.isActive;
+                cmd.Parameters.Add(paramActive);
+
+                SqlParameter paramDisplay = new SqlParameter();//Display NAme
+                paramDisplay.ParameterName = "@display_name";
+                paramDisplay.Value = employee.display_name;
+                cmd.Parameters.Add(paramDisplay);
+
+                SqlParameter paramSup = new SqlParameter();//Supervisor
+                paramSup.ParameterName = "@Supervisor_ID";
+                if(employee.Supervisor_ID != null)
+                {
+                    paramSup.Value = employee.Supervisor_ID;
+                }
+                else
+                {
+                    paramSup.Value = DBNull.Value;
+                }
+                cmd.Parameters.Add(paramSup);
+
+                conn.Open(); //Opens connection
+                cmd.ExecuteNonQuery(); //Add to table
+            }
+        }
 
 
         public ActionResult Staff()
         {
+
+
+                return View();
+        }
+
+
+        //Two Lists for Add Employee
+        public ContentResult GetDepartmentList()
+        {
+            using (team4zooEntities DB = new team4zooEntities())
+            {
+                List<DepartmentListModel> deptList = new List<DepartmentListModel>();
+
+                //Get Department List
+                var results = DB.Departments.ToList();
+
+                //Convert all necessary data to List.
+                foreach (Department department in results)
+                {
+                    DepartmentListModel deptVM = new DepartmentListModel();
+                    //Assign Values
+
+                    //Check if underscore
+                    if (department.department_name.Contains('_'))
+                    {
+                        string tmpname = department.department_name.Replace("_", " ");
+                        deptVM.department_name = tmpname;
+                    }
+                    else
+                    {
+                        deptVM.department_name = department.department_name;
+                    }
+
+                    deptVM.Department_ID = department.Department_ID;
+
+
+                    //Add to Chart Data
+                    deptList.Add(deptVM);
+                }
+
+                //Return serialised Json
+                return Content(JsonConvert.SerializeObject(deptList), "application/json");
+
+            }
+        }
+
+        public ContentResult GetRoleList()
+        {
+            using (team4zooEntities DB = new team4zooEntities())
+            {
+                List<RoleListModel> rolelist = new List<RoleListModel>();
+
+                //Get Role List
+                var results = DB.Roles.ToList();
+
+                //Convert all necessary data to List.
+                foreach (Role role in results)
+                {
+                    RoleListModel roleVM = new RoleListModel();
+                    //Assign Values
+
+                    //Check if underscore
+                    if (role.Job_Title.Contains('_'))
+                    {
+                        string tmpname = role.Job_Title.Replace("_", " ");
+                        roleVM.Job_Title = tmpname;
+                    }
+                    else
+                    {
+                        roleVM.Job_Title = role.Job_Title;
+                    }
+
+                    //Assign Role ID
+                    roleVM.Role_ID = role.Role_ID;
+
+
+                    //Add to Chart Data
+                    rolelist.Add(roleVM);
+                }
+
+                //Return serialised Json
+                return Content(JsonConvert.SerializeObject(rolelist), "application/json");
+
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult addEmp()
+        {
+
+
             return View();
         }
+
+        [HttpPost]
+        public ActionResult addEmp(FormCollection formCollection)
+        {
+            DateTime dateC;
+            if (formCollection["f_name"].Length <= 0)
+            {
+                ViewBag.Message = "Unable to Add, First Name cannot be blank!";
+                return View();
+            }
+            else if (formCollection["l_name"].Length <= 0)
+            {
+                ViewBag.Message = "Unable to Add, Last Name cannot be blank!";
+                return View();
+            }
+            else if (formCollection["email"].Length <= 0)
+            {
+                ViewBag.Message = "Unable to Add, Email cannot be blank!";
+                return View();
+            }
+            else if (formCollection["ssn"].Length < 9)
+            {
+                ViewBag.Message = "Unable to Add, SSN must be 9 digits!";
+                return View();
+            }
+            else if(formCollection["phone_num"].Length < 12)
+            {
+                ViewBag.Message = "Unable to Add, phone number format incorrect!";
+                return View();
+            }
+            else if(Convert.ToDouble(formCollection["hourly_wage"]) < 7.25)
+            {
+                ViewBag.Message = "Unable to Add, hourly wage cannot be lower than the minimum wage ($7.25)!";
+                return View();
+            }
+
+            //Check Input
+            if (ModelState.IsValid)
+            {
+                //Assign Values
+                Employee employee = new Employee();
+                employee.f_name = formCollection["f_name"];
+                if (formCollection["mid_init"].Length > 0) //If Middle initial exists, add
+                {
+                    employee.mid_init = formCollection["mid_init"];
+                }
+                else
+                {
+                    employee.mid_init = null;
+                }
+
+                employee.l_name = formCollection["l_name"];
+                employee.email = formCollection["email"];
+                employee.sex = formCollection["sex"];
+                employee.dob = DateTime.Parse(formCollection["dob"]);
+                employee.ssn = formCollection["ssn"];
+                employee.hire_date = DateTime.Parse(formCollection["hire_date"]);
+                employee.phone_num = formCollection["phone_num"];
+                employee.hourly_wage = Convert.ToDecimal(formCollection["hourly_wage"]);
+
+
+                //Checked Box condition check
+                if (formCollection["isActive"] == "true,false")
+                {
+                    employee.isActive = true;
+                }
+                else
+                {
+                    employee.isActive = false;
+                }
+
+                if (formCollection["Department_ID"] != "null")
+                {
+                    Guid DeptID = new Guid(formCollection["Department_ID"]);
+                    employee.Department_ID = DeptID;
+                }
+                else
+                {
+                    employee.Department_ID = null;
+                }
+
+                if (formCollection["Role_ID"] != "null")
+                {
+                    Guid roleID = new Guid(formCollection["Role_ID"]);
+                    employee.Role_ID = roleID;
+                }
+                else
+                {
+                    employee.Role_ID = null;
+                }
+
+                //Get Department's Supervisor ID
+                if (formCollection["Department_ID"] != "null")
+                {
+                    using (team4zooEntities DB = new team4zooEntities())
+                    {
+                        Guid id = new Guid(formCollection["Department_ID"]);
+                        Department department = DB.Departments.Single(Department => Department.Department_ID == id);
+                        employee.Supervisor_ID = department.Supervisor_ID;
+                    }
+                }
+                else
+                {
+                    employee.Supervisor_ID = null;
+                }
+                //Set DisplayName
+                employee.display_name = employee.f_name + " " + employee.l_name[0];
+
+                //INSERT ADD FUNCTION HERE
+                AdminController adminController = new AdminController();
+                adminController.AddEmployee(employee);
+                ViewBag.Message = "New Employee Added!";
+
+                return RedirectToAction("Staff");
+
+            }
+            else
+            {
+                ViewBag.Message = "Unable to Add, Error Input";
+                return View();
+            }
+        }
+
 
         public ActionResult Maintenance()
         {

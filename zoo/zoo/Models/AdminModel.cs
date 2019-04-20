@@ -5,7 +5,7 @@ using System.Web;
 
 namespace zoo.Models
 {
-    public class AdminReport
+    public class AdminModel
     {
     }
 
@@ -16,6 +16,16 @@ namespace zoo.Models
         public decimal revenue { get; set; }
         public decimal expenditure { get; set; }
     }
-    
 
+    public class DepartmentListModel
+    {
+        public string department_name { get; set; }
+        public Guid Department_ID { get; set; }
+    }
+
+    public class RoleListModel
+    {
+        public string Job_Title { get; set; }
+        public Guid Role_ID { get; set; }
+    }
 }
