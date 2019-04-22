@@ -207,18 +207,26 @@ namespace zoo.Controllers
         [HttpPost]
         public ActionResult AddMember(Customer Model)
         {
-            using (team4zooEntities db = new team4zooEntities())
+             using (team4zooEntities db = new team4zooEntities())
             {
-                Customer NewEntry = new Customer();
-                NewEntry.Customer_ID = System.Guid.NewGuid();
-                NewEntry.f_name =  Model.f_name;
-                NewEntry.l_name = Model.l_name;
-                NewEntry.phone_number = Model.phone_number;
-                NewEntry.membership = true;
-                db.Customers.Add(NewEntry);
-                db.SaveChanges();
-                ViewBag.Message = "Member Added";
-                return View();
+                if (Model.f_name == null || Model.l_name == null || Model.phone_number == null)
+                {
+                    ViewBag.Message = "Must Enter All Fields";
+                    return View();
+                }
+                else
+                {
+                    Customer NewEntry = new Customer();
+                    NewEntry.Customer_ID = System.Guid.NewGuid();
+                    NewEntry.f_name = Model.f_name;
+                    NewEntry.l_name = Model.l_name;
+                    NewEntry.phone_number = Model.phone_number;
+                    NewEntry.membership = true;
+                    db.Customers.Add(NewEntry);
+                    db.SaveChanges();
+                    ViewBag.Message = "Member Added";
+                    return View();
+                }
             }
         }
     }
