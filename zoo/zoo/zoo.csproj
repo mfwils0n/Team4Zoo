@@ -564,8 +564,9 @@
     <Content Include="Views\Admin\editdept.cshtml" />
     <Content Include="Views\Admin\Maintenance.cshtml" />
     <Content Include="Views\Admin\Report.cshtml" />
-    <Content Include="Views\Admin\Finance.cshtml" />
     <Content Include="Views\Admin\addEmp.cshtml" />
+    <Content Include="Views\Admin\searchEmp.cshtml" />
+    <Content Include="Views\Admin\editEmp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

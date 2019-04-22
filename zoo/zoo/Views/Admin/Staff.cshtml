@@ -62,7 +62,7 @@
 
     <div class="btn-group-vertical">
         <button type="button" class="btn btn-primary" onclick="Redirect_addEmp()">Add New Employee</button>
-        <button type="button" class="btn btn-primary">Employee Lookup</button>
+        <button type="button" class="btn btn-primary" onclick="Redirect_searchEmp()">Employee Lookup</button>
         <button type="button" class="btn btn-primary">Edit Employee</button>
         <button type="button" class="btn btn-primary">Delete Employee</button>
     </div>
@@ -92,6 +92,9 @@
 
         function Redirect_addEmp() {
             location.href = "addEmp";
+        }
+        function Redirect_searchEmp() {
+            location.href = "searchEmp";
         }
     </script>
 </body>

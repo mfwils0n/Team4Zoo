@@ -1,7 +1,7 @@
 ﻿@model zoo.Models.Employee
 
 @{
-    ViewBag.Title = "addEmp";
+    ViewBag.Title = "editEmp";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
@@ -18,10 +18,11 @@
 }
 
 </style>
+<body>
     <p class="pad"></p>
-<h2>Add Employee</h2>
+<h2>Edit Employee</h2>
 
-@using (Html.BeginForm("addEmp", "Admin", FormMethod.Post, new {id = "popupform"})) 
+@using (Html.BeginForm("editEmp", "Admin", FormMethod.Post, new {id = "popupform"})) 
 {
     @Html.AntiForgeryToken()
     
@@ -74,14 +75,6 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.dob, "Date of Birth", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dob, new {htmlAttributes = new { @type="date",@class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.ssn,"SSN", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ssn, new { htmlAttributes = new { @maxlength="9", @class = "form-control" } })
@@ -97,20 +90,19 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.hire_date, "Hire Date", htmlAttributes: new {   @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.hire_date, new { htmlAttributes = new { @type="date",@class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.hire_date, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
 
         <div class="form-group">
             @Html.LabelFor(model => model.phone_num, "Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.phone_num, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.phone_num, "Format: XXX-XXX-XXXX", new { @class = "text-danger" })
+            </div>
+        </div>
+                <div class="form-group">
+            @Html.LabelFor(model => model.sick_days, "Sick Days", htmlAttributes: new {   @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sick_days, new { htmlAttributes = new {@class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sick_days, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -143,9 +135,13 @@
             </div>
         </div>
 
+            @Html.HiddenFor(model => model.Employee_ID)
+            @Html.HiddenFor(model => model.Department_ID)
+            @Html.HiddenFor(model => model.Role_ID)
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -171,12 +167,10 @@
 @section Scripts{
 
 <script type ="text/javascript">
-
         $.getJSON("/Admin/GetDepartmentList/", function (deptData) {
 
             $('#Department-Dropdown').empty();
-            $('#Department-Dropdown').append($('<option value="null">' + 'Please Select a Department' + '</option>'));
-            $('#Department-Dropdown').append($('<option value="null">' + 'Unassigned' + '</option>'));
+            $('#Department-Dropdown').append($('<option>' + 'Unassigned' + '</option>'));
             for (var i = 0; i <= deptData.length - 1; i++) {
                 $('#Department-Dropdown').append($('<option value="' + deptData[i].Department_ID + '">' + deptData[i].department_name + '</option>'));
             }
@@ -185,8 +179,7 @@
             $.getJSON("/Admin/GetRoleList/", function (RoleData) {
 
             $('#Role-Dropdown').empty();
-                $('#Role-Dropdown').append($('<option value="null">' + 'Please Select a Position' + '</option>'));
-                $('#Role-Dropdown').append($('<option value="null">' + 'Unassigned' + '</option>'));
+                $('#Role-Dropdown').append($('<option>' + 'Unassigned' + '</option>'));
             for (var i = 0; i <= RoleData.length - 1; i++) {
                 $('#Role-Dropdown').append($('<option value="' + RoleData[i].Role_ID + '">' + RoleData[i].Job_Title + '</option>'));
             }
@@ -194,3 +187,4 @@
 </script>
 
 }
+    </body>

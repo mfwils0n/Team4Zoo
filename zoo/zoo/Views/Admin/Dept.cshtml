@@ -96,87 +96,12 @@
                         @Html.DisplayFor(modelItem => item.dep_expenditure)
                     </td>
                     <td>
-                            @Html.ActionLink("Edit", "editDept", new { id=item.Department_ID }, new {@class="btn btn-primary"}) |
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DetailModal">Detail</button> |
-                            <div class="modal fade" id="DetailModal" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <table class="table">
-                                            <tr>
-                                                <th>
-                                                    @Html.Label("Department Revenue")
-                                                </th>
-                                                <th>
-                                                    @Html.Label("Supervisor")
-                                                </th>
-                                                <th>
-                                                    @Html.Label("Department Expenditure")
-                                                </th>
-                                                <th>
-                                                    @Html.Label("Number of Employees")
-                                                </th>
-                                                <th></th>
-                                            </tr>
-                                            <tr>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Delete</button> |
-                             <div class="modal fade" id="deleteModal" role="alertdialog">
-                            <div class="modal-dialog">
-
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Confirm Delete?</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                         <button type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#msgModal">Message</button>
-                        <div class="modal fade" id="msgModal" role="dialog">
-                            <div class="modal-dialog">
-
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Please choose a message type and enter your message:</h4>
-                                        <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" id="msgbtn" aria-haspopup="true" aria-expanded="false" type="button" data-toggle="dropdown">
-                                                Message Type
-                                                <span class="caret"></span>
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="msgbtn">
-                                                <a class="dropdown-item" href="#">To Supervisor</a>
-                                                <a class="dropdown-item" href="#">Announcement</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <textarea class="form-control" rows="5" id="message"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Send</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
+                            @Html.ActionLink("Edit", "editDept", new { id=item.Department_ID }, new {@class="btn btn-primary"})
+                            <p></p>
+                           @using (Html.BeginForm("DeleteDept", "Admin", new{ id = item.Department_ID}))
+                            {
+                                <input type="submit" value="Delete" class ="btn btn-primary" onclick="return confirm('Confirm Delete Department: @item.department_name');"/>
+                            }
 
 
                     </td>
