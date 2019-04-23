@@ -67,47 +67,63 @@
                 <th>
                     @Html.Label("Quantity")
                 </th>
-
+                <th>
+                    @Html.Label("Wholesale Price")
+                </th>
                 <th></th>
             </tr>
 
-@foreach (var item in Model){
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.item_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ordered_quantity)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Item_ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Item_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Item_ID })
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.item_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ordered_quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wholesaleprice)
+                    </td>
+                    @*<td>
+                        @using (Html.BeginForm("DeleteItem", "SalesManager", new { id = item.Item_ID }))
+                        {
+                            <input type="submit" value="Delete" class="btn btn-primary" onclick="return confirm('Confirm Delete Item: @item.item_name');" />
+                        }
+                    </td>*@
+                </tr>
+            }
 
-</table>
+        </table>
     </div>
 
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
 
-<script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
 
-for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.maxHeight) {
-            content.style.maxHeight = null;
-        } else {
-            content.style.maxHeight = content.scrollHeight + "px";
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
         }
-    });
-}
-</script>
+    </script>
 </body>
