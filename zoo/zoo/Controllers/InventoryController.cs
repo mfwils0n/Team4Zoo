@@ -17,7 +17,7 @@ namespace zoo.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddItem(Inventory Model, DateTime last, DateTime re)
+        public ActionResult AddItem(Inventory Model, DateTime? last, DateTime? re)
         {
 
              using (team4zooEntities db = new team4zooEntities())
