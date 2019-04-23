@@ -50,5 +50,13 @@ namespace zoo.Controllers
             }
                 return View();
         }
+        public ActionResult ViewAttractions()
+        {
+            team4zooEntities db = new team4zooEntities();
+
+            List<Attraction> attractionlist = db.Attractions.ToList();
+            List<Attraction> SortedAttractions = attractionlist.OrderBy(x => x.start_date).ToList();
+            return View(SortedAttractions);
+        }
     }
 }

@@ -572,6 +572,7 @@
     <Content Include="Views\Admin\editEmp.cshtml" />
     <Content Include="Views\CaregiverSuperAttraction\AddAttraction.cshtml" />
     <Content Include="Views\Inventory\AddItem.cshtml" />
+    <Content Include="Views\CaregiverSuperAttraction\ViewAttractions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
