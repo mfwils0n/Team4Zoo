@@ -567,6 +567,7 @@
     <Content Include="Views\Admin\addEmp.cshtml" />
     <Content Include="Views\Admin\searchEmp.cshtml" />
     <Content Include="Views\Admin\editEmp.cshtml" />
+    <Content Include="Views\SalesManager\editItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

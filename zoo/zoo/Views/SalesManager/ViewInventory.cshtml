@@ -88,12 +88,14 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.wholesaleprice)
                     </td>
-                    @*<td>
+                    <td>
+                        @Html.ActionLink("Edit", "editItem", new { id = item.Item_ID }, new { @class = "btn btn-primary" })
+                        <p></p>
                         @using (Html.BeginForm("DeleteItem", "SalesManager", new { id = item.Item_ID }))
                         {
                             <input type="submit" value="Delete" class="btn btn-primary" onclick="return confirm('Confirm Delete Item: @item.item_name');" />
                         }
-                    </td>*@
+                    </td>
                 </tr>
             }
 

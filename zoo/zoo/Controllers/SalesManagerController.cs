@@ -106,6 +106,82 @@ namespace zoo.Controllers
             return View(inventorylist);
         }
 
+        [HttpGet]
+        public ActionResult editItem(string id)
+        {
+            using (team4zooEntities DB = new team4zooEntities())
+            {
+                Guid ID = new Guid(id);
+                Inventory item = DB.Inventory.Single(Inventory => Inventory.Item_ID == ID);
+
+                return View(item);
+            }
+        }
+
+        //This creates a SQL ready item object and adds to database
+        public void SaveItem(Inventory item)
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = "Server=den1.mssql8.gear.host;Database=team4zoo;Uid=team4zoo;Pwd=Ji627i1J-x5?"; //Connection String with login info.
+
+                //Call Query
+                SqlCommand cmd = new SqlCommand("SaveItem", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //Set Parameters
+                SqlParameter paramIName = new SqlParameter();//ItemName
+                paramIName.ParameterName = "@item_name";
+                paramIName.Value = item.item_name;
+                cmd.Parameters.Add(paramIName);
+
+                SqlParameter paramID = new SqlParameter();//ItemID
+                paramID.ParameterName = "@Item_ID";
+                paramID.Value = item.Item_ID;
+                cmd.Parameters.Add(paramID);
+
+                SqlParameter paramPrice = new SqlParameter();//Price
+                paramPrice.ParameterName = "@price";
+                paramPrice.Value = item.price;
+                cmd.Parameters.Add(paramPrice);
+
+                SqlParameter paramQuantity = new SqlParameter();//Quantity
+                paramQuantity.ParameterName = "@ordered_quantity";
+                paramQuantity.Value = item.ordered_quantity;
+                cmd.Parameters.Add(paramQuantity);
+
+                SqlParameter paramWPrice = new SqlParameter(); //Wholesale Price
+                paramWPrice.ParameterName = "@wholesaleprice";
+                paramWPrice.Value = item.wholesaleprice;
+                cmd.Parameters.Add(paramWPrice);
+
+
+                conn.Open(); //Opens connection
+                cmd.ExecuteNonQuery(); //Add to table
+            }
+        }
+
+        [HttpPost]
+        public ActionResult editItem(Inventory item)
+        {
+
+            if (ModelState.IsValid && item.item_name.Length > 0 && item.price >= 0 && item.ordered_quantity >= 0 && item.wholesaleprice >= 0)
+            {
+                SalesManagerController salesmController = new SalesManagerController();
+
+                salesmController.SaveItem(item);
+
+                ViewBag.Message = "Edit Successful";
+
+                return RedirectToAction("ViewInventory");
+            }
+            else
+            {
+                ViewBag.Message = "Invalid Input";
+                return View();
+            }
+        }
+
         //DeleteItem Method
         public void DeleteInventory(Guid id)
         {
