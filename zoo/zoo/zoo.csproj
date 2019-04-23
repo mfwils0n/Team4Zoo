@@ -185,9 +185,11 @@
     <Compile Include="Controllers\CareGiverBaseAttractionController.cs" />
     <Compile Include="Controllers\CareGiverHomeController.cs" />
     <Compile Include="Controllers\CareGiverReportController.cs" />
+    <Compile Include="Controllers\CaregiverSuperAttractionController.cs" />
     <Compile Include="Controllers\CaregiverSuperController.cs" />
     <Compile Include="Controllers\FeedCareController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SalesAssociateController.cs" />
@@ -233,6 +235,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DatabaseModel1.Designer.cs" />
     <Compile Include="Models\Department.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -567,6 +570,8 @@
     <Content Include="Views\Admin\addEmp.cshtml" />
     <Content Include="Views\Admin\searchEmp.cshtml" />
     <Content Include="Views\Admin\editEmp.cshtml" />
+    <Content Include="Views\CaregiverSuperAttraction\AddAttraction.cshtml" />
+    <Content Include="Views\Inventory\AddItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
