@@ -1,5 +1,5 @@
 ﻿@using zoo.Models
-@model Inventory
+@model Attraction
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -28,7 +28,7 @@
         <text style="align-content:center"> Check Inventory</text>
     </header>
     <div id="login-div">
-        @using (Html.BeginForm("MyAnimals", "CareGiverSuper", FormMethod.Post))
+        @using (Html.BeginForm("MyAnimals", "CaregiverSuper", FormMethod.Post))
         {
             <table>
                 <tr>
