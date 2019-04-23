@@ -1,9 +1,12 @@
-﻿using zoo.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Data;
+using System.Data.SqlClient;
+using Newtonsoft.Json;
+using System.Data.SqlTypes;
+using zoo.Models;
 
 namespace zoo.Controllers
 {
@@ -19,6 +22,16 @@ namespace zoo.Controllers
                 Employees.Add(new MyEmployee(person.f_name, person.l_name, person.email, person.phone_num));
             }
             return View(Employees);
+        }
+
+        public ActionResult Item()
+        {
+            using (team4zooEntities DB = new team4zooEntities())
+            {
+                List<Inventory> itemlist = DB.Inventory.ToList();
+
+                return View(itemlist);
+            }
         }
 
         public IEnumerable<Employee> ViewMyEmployees()
@@ -93,8 +106,36 @@ namespace zoo.Controllers
             return View(inventorylist);
         }
 
-                
-           
-        
+        //DeleteItem Method
+        public void DeleteInventory(Guid id)
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = "Server=den1.mssql8.gear.host;Database=team4zoo;Uid=team4zoo;Pwd=Ji627i1J-x5?"; //Connection String with login info.
+
+                //Call Query
+                SqlCommand cmd = new SqlCommand("DeleteInventory", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //Set Parameters
+                SqlParameter paramID = new SqlParameter();//ItemName
+                paramID.ParameterName = "@Item_ID";
+                paramID.Value = id;
+                cmd.Parameters.Add(paramID);
+
+                conn.Open(); //Opens connection
+                cmd.ExecuteNonQuery(); //Add to table
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeleteItem(string id)
+        {
+            Guid guid = new Guid(id);
+            DeleteInventory(guid);
+            return RedirectToAction("ViewInventory");
+        }
+
+
     }
 }
